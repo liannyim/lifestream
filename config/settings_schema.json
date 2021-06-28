@@ -600,7 +600,7 @@
         "type": "checkbox",
         "id": "font_family_custom",
         "label": " Custom Font ",
-        "info": " Neutra Text TF Font Family"
+        "info": " Gilroy"
       },
       {
         "type": "checkbox",

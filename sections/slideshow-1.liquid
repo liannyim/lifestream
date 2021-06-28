@@ -173,13 +173,13 @@
       .slideshow__text-content.slideshow__text-content--vertical-top {
         top: 120px;
       }
-    
+
       .slideshow__text-content.slideshow__text-content--vertical-bottom {
         top: auto;
         bottom: 40px;
       }
     }
-    
+
 .no-js .slideshow__text-content,.slick-initialized .slick-active .slideshow__text-content {}
 .no-js .slideshow__text-content,.slick-initialized .slick-active .slideshow__text-content li .slideshow__toptitle,.slick-initialized .slick-active .slideshow__text-content li .slideshow__title,
 .slick-initialized .slick-active .slideshow__text-content li .slideshow__subtitle,.slick-initialized .slick-active .slideshow__text-content .slideshow__btn{
@@ -261,7 +261,7 @@
     padding-top: 0;
   }
 
-  .slideshow__text-content--mobile::after { 
+  .slideshow__text-content--mobile::after {
     display: none;
   }
 }
@@ -271,7 +271,7 @@
   .slideshow__title {
     font-size: 70px;
     font-weight: 400;
-    line-height:1;
+    line-height: normal;
   }
   .mega-subtitle{
     line-height: 1.6;
@@ -404,7 +404,7 @@
       {%- assign text_alignments = block.settings.text_alignment | split: ' ' -%}
       {%- assign text_horizontal_alignment = text_alignments.first -%}
       {%- assign text_vertical_alignment = text_alignments.last | strip -%}
-      
+
       <div class="slideshow__slide slideshow__slide--{{ block.id }}" {{ block.shopify_attributes }} style="background-color: {{block.settings.bgwrap}};">
         {%- if block.settings.image == blank -%}
         <div class="slideshow__image js">
@@ -513,7 +513,7 @@
         {%- endunless -%}
         {%- unless block.settings.subheading == blank -%}
         <span class="mega-subtitle slideshow__subtitle slideshow__subtitle--mobile mb-3" style="color:{{block.settings.subheading_color}}">
-          {{ block.settings.subheading }} 
+          {{ block.settings.subheading }}
         </span>
         {%- endunless -%}
 
@@ -535,7 +535,7 @@
         </style>
         <a href="{{ block.settings.button_link }}" class="btn btn-theme gradient-theme slideshow__btn slideshow__btn--mobile slideshow__btn{{block.id}}">
           <span>{{ block.settings.button_label | escape }}</span>
-        </a> 
+        </a>
         {%- endif -%}
       </div>
     </div>
