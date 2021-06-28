@@ -1,0 +1,258 @@
+<!-- featured-collections-4.liquid -->
+<style>
+
+#txtanimation-{{ section.id }} .item__collection .item__collection-name{
+    {%- if section.settings.stroke -%}
+    -webkit-text-stroke: 1px {{section.settings.colortxt}};
+    color: transparent;
+    {%- else -%}
+      color: {{section.settings.colortxt}}
+    {%- endif -%}
+}
+#txtanimation-{{ section.id }} .item__collection:hover .item__collection-name{
+    {%- if section.settings.stroke -%}
+    -webkit-text-stroke: 1px {{section.settings.colortxthover}};
+    color: transparent;
+    {%- else -%}
+      color: {{section.settings.colortxthover}}
+    {%- endif -%}
+}
+#txtanimation-{{ section.id }} .item__collection .item__collection-sub{
+  color: {{section.settings.colortxt}}
+}
+#txtanimation-{{ section.id }} .item__collection:hover .item__collection-sub{
+  color: {{section.settings.colortxthover}}
+}
+#txtanimation-{{ section.id }} .item__collection .item__collection-name::before {
+  background: {{section.settings.colortxthover}};
+}
+
+
+</style>
+<div class="customstyle{{ section.id }}  data-aos="{{section.settings.animation}}" > 
+    {%- include 'style-section' -%}
+      <div class="{{ section.settings.setwidth }}">
+      <div class="section-block">
+          {%- include 'section-heading' -%}
+          <div class="collectionlist-wrapper" >
+            <nav id="txtanimation-{{ section.id }}" class="txtcollection text-{{section.settings.textcontent}}" data-section-type="textanimation" data-section-id="{{ section.id }}" data-animation="{{section.settings.type_animation}}" >
+              {%- for block in section.blocks -%}
+              {%- assign featured_collection = collections[block.settings.collection] -%}
+              {%- assign featured_image = block.settings.image -%}
+              {%- assign collectionTitle = featured_collection.title | default: 'Collection title' -%}
+                <a class="item__collection item_{{ section.id }}" href={{featured_collection.url | default :'#'}}>
+                  {%- if featured_image != blank -%}
+                    <img src="{{featured_image | img_url: '600x'}}" 
+                    class=" img lazyload" 
+                    data-srcset="{{ img_url }}"
+                    data-widths="[360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                    data-aspectratio="{{ featured_image.aspect_ratio }}"
+                    data-sizes="auto"
+                    alt= {{ collectionTitle }}>
+                    <noscript>
+                        <img class="lazyloaded" src="{{ featured_image | img_url: '600x' }}" alt="{{ collectionTitle }}">
+                      </noscript>
+                    {%- else -%}
+                      <div class="img">{{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}</div>
+                    {%- endif -%}
+                  <span class="h2 item__collection-name d-block">{{ collectionTitle }}</span>
+                  <span class="item__collection-sub font-family-2 text-uppercase d-block">{{ featured_collection.products_count | default: 0 }} {{ featured_collection.products_count | pluralize: 'product', 'products' }}</span>
+                   
+                </a>
+                {%- endfor -%}
+              </nav>
+          </div>
+          {%- if section.blocks.size == 0 -%}
+          {%- include 'no-blocks' -%}
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+    
+    {% schema %}
+    {
+      "name": "Collection list Style 4",
+      "class": "index-section",
+      "max_blocks": 6,
+      "settings": [
+      {
+        "type": "select",
+        "id": "animation",
+        "options": [
+          { "value": "", "label": "None"},
+          { "value": "fade", "label": "Fade"},
+          { "value": "fade-up", "label": "Fade Up"},
+          { "value": "fade-down", "label": "Fade Down"},
+          { "value": "fade-left", "label": "Fade Left"},
+          { "value": "fade-right", "label": "Fade Right"},
+          { "value": "fade-up-right", "label": "Fade Up Right"},
+          { "value": "fade-up-left", "label": "Fade Up Left"},
+          { "value": "fade-down-right", "label": "Fade Down Right"},
+          { "value": "fade-down-left", "label": "Fade Down Left"},
+          { "value": "flip-up", "label": "Flip Up"},
+          { "value": "flip-down", "label": "Flip Down"},
+          { "value": "flip-left", "label": "Flip Left"},
+          { "value": "flip-right", "label": "Flip Right"},
+          { "value": "slide-up", "label": "Slide Up"},
+          { "value": "slide-down", "label": "Slide Down"},
+          { "value": "slide-left", "label": "Slide Left"},
+          { "value": "slide-right", "label": "Slide Right"},
+          { "value": "zoom-in", "label": "Zoom In"},
+          { "value": "zoom-in-up", "label": "Zoom In Up"},
+          { "value": "zoom-in-down", "label": "Zoom In Down"},
+          { "value": "zoom-in-left", "label": "Zoom In Left"},
+          { "value": "zoom-in-right", "label": "Zoom In Right"},
+          { "value": "zoom-out", "label": "Zoom Out"},
+          { "value": "zoom-out-up", "label": "Zoom Out Up"},
+          { "value": "zoom-out-down", "label": "Zoom Out Down"},
+          { "value": "zoom-out-left", "label": "Zoom Out Feft"},
+          { "value": "zoom-out-right", "label": "Zoom Out Right"}
+        ],
+        "label": "Select Animation"
+    },
+      {
+        "type": "text",
+        "id": "paddingsection",
+        "label": "Padding Section",
+        "default": "0px 0px 0px 0px",
+        "info": "Padding: Top Right Bottom Left"
+      },
+      {
+        "type": "text",
+        "id": "paddingmobile",
+        "label": "Padding Section Mobile",
+        "default": "60px 0px 60px 0px",
+        "info": "Padding: Top Right Bottom Left"
+      },
+      {
+        "type": "text",
+        "id": "marginsection",
+        "label": "Margin Section",
+        "default": "0px 0px 0px 0px",
+        "info": "Margin: Top Right Bottom Left"
+      },
+      {
+        "type": "text",
+        "id": "marginmobile",
+        "label": "Margin Mobile",
+        "default": "0px 0px 0px 0px",
+        "info": "Margin: Top Right Bottom Left"
+      },
+      {
+        "type": "color",
+        "id": "bgsection",
+          "label": "Background Section",
+          "default": "#fefefe"
+      },
+      {
+        "type": "select",
+        "id": "setwidth",
+        "label": "Full Width",
+        "default": "container",
+        "options": [
+          {
+            "value": "container",
+            "label": "Box"
+          },
+          {
+            "value": "container-fluid",
+            "label": "Container Fluid"
+          },
+          {
+            "value": "full",
+            "label": "Full"
+          }
+        ]
+      },
+      
+      {
+        "type": "text",
+        "id": "title_top",
+        "label": "Sub Title Top",
+        "default": "Sub Title Top"
+      },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Collection list"
+        },
+        {
+          "type": "textarea",
+          "id": "des",
+          "label": "HTML / Description"
+        },
+        {
+          "type": "select",
+          "id": "textcontent",
+          "label": "Align Text",
+          "default": "left",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            }
+          ]
+        },
+        {
+          "type": "checkbox",
+          "id": "stroke",
+          "label": "Stroke Text",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "colortxt",
+            "label": "Color Text",
+            "default": "#000000"
+        },
+        {
+          "type": "color",
+          "id": "colortxthover",
+          "label": "Hover Color",
+          "default": "#FF7143"
+        }
+
+      ],
+      "blocks": [
+        {
+          "type": "collection",
+          "name": "Collection",
+          "settings": [
+            {
+              "id": "collection",
+              "type": "collection",
+              "label": "Collection"
+            },
+            {
+              "id": "image",
+              "type": "image_picker",
+              "label": "Image"
+            }
+          ]
+        }
+      ],
+      "presets": [
+        {
+          "name": "Collection list Style 4",
+          "category": "Collection",
+          "blocks": [
+            {
+              "type": "collection"
+            },
+            {
+              "type": "collection"
+            },
+            {
+              "type": "collection"
+            }
+          ]
+        }
+      ]
+    }
+    {% endschema %}
+    
