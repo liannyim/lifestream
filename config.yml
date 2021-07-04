@@ -1,13 +1,13 @@
 production:
   password: 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
-  theme_id: "123130446005"
+  theme_id: "124175679669"
   store: lifestream-nz.myshopify.com
   ignore_files:
     - settings_data.json # Uncomment this line to avoid resetting theme settings
 
 development:
   password: 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
-  theme_id: "124175679669"
+  theme_id: "124477833397"
   store: lifestream-nz.myshopify.com
   ignore_files:
     - settings_data.json # Uncomment this line to avoid resetting theme settings
