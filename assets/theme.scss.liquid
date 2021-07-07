@@ -9562,3 +9562,65 @@ a.text-primary{
     max-width: 20%;
   }
 }
+/*================ PDP - value props ================*/
+
+.product__value-props{
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  margin-left: 0;
+  padding: 30px 0 0;
+  border-top: 1px solid #eeede7;
+  border-bottom: 1px solid #eeede7;
+
+    @include media-query($medium-down){
+      padding: 20px 0;
+    } 
+  
+  .img-wrapper{
+    margin-bottom: 16px;
+  }
+
+  .grid__item{
+    text-align: center;
+    margin-bottom: 30px;
+    @include media-query($large-down){
+      padding: 0 10px;
+      &:nth-child(2n+1){
+        padding: 0 10px 0 0;
+      }
+    }
+    &:first-child{
+      padding: 0 10px 0 0;
+    }
+  }
+
+  .info-wrapper__heading{
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    line-height: 12px;
+  }
+
+  .info-wrapper__desc{
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 14px;
+    color: #797979;
+    margin-top: 5px;
+  }
+
+}
+
+.medium-down--one-half{
+  @include media-query($medium-down){
+    width: 50%;
+  } 
+}
+
+.large-up--one-half{
+  @include media-query($large-up){
+    width: 25%;
+  } 
+}
