@@ -97,18 +97,34 @@
     max-width: 50%;
   }
 
+
+  
+
   {% if collection_primaryColor != blank %}
+
+  .g-breadcrumb a:hover{
+    color: {{ collection_primaryColor }}!important;
+  }
+
   .product-single__meta-saving-{{collection.id}} {
     color: {{ collection_primaryColor }};
   }
 
-  .meta-btnColor-{{collection.id}} button{
+  .btn-theme-{{ collection.id }},
+  .sticky-cart-{{ collection.id }} #js-sticky-btn,
+  .meta-btnColor-{{collection.id}} .btn-theme{
     background: {{ collection_primaryColor }};
   }
-  .meta-btnColor-{{collection.id}} button:before{
+
+  .btn-theme-{{ collection.id }}:before,
+  .sticky-cart-{{ collection.id }} #js-sticky-btn:before,
+  .meta-btnColor-{{collection.id}} .btn-theme:before{
     background: {{ collection_primaryColor }};
   }
-  .meta-btnColor-{{collection.id}} button:hover:before{
+
+  .btn-theme-{{ collection.id }}:hover:before,
+  .sticky-cart-{{ collection.id }} #js-sticky-btn:hover:before,
+  .meta-btnColor-{{collection.id}} .btn-theme:hover:before{
     filter: brightness(0.6);
   }
   {% endif %}
@@ -366,7 +382,7 @@
               </button>
             </div>
             {% if section.settings.enable_payment_button %}
-              <div class="product-form__buynow">
+              <div class="product-form__buynow hide">
               {{ form | payment_button }}
               {% if current_variant.available == false %}<style>.shopify-payment-button{display:none}</style>{% endif %}
               </div>

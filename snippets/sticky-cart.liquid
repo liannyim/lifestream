@@ -117,7 +117,7 @@
     .disable #js-sticky-close .icon-close+.icon{display:block}
   </style>
 <div id="js-anchor-sticky-cart"></div>
-  <div class="sticky-cart-wr shadow d-flex" >
+  <div class="sticky-cart-wr shadow d-flex sticky-cart-{{ collection.id }}" >
     <div id="js-sticky-prd" class="container align-self-center">
       <img id="js-sticky-img" src="{{product.featured_image | img_url: '200x'}}" />
       <h3 class="px-4 m-0">{{product.title}} <span id="js-sticky-title">{%- unless product.has_only_default_variant -%}- {{current_variant.title}}{%- endunless -%}</span></h3>

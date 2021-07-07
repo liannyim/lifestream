@@ -11,6 +11,17 @@ $(document).ready(function () {
                 $('.product__value-props').css("justify-content","space-between");
             }
         }
+        //sticky-cart will slides up when reached end of main product div
+         var heightThreshold_end  = $(".product-single").height();
         
+         $(window).scroll(function() {
+             var scroll = $(window).scrollTop();
+
+             if (scroll >=  heightThreshold_end ) {
+                 $('.sticky-cart-wr').addClass('active');
+             } else {
+                 $('.sticky-cart-wr').removeClass('active');
+             }
+         });
     }
 });
