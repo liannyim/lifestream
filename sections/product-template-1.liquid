@@ -103,7 +103,13 @@
   }
 
   .meta-btnColor-{{collection.id}} button{
-    background-color: {{ collection_primaryColor }}
+    background: {{ collection_primaryColor }};
+  }
+  .meta-btnColor-{{collection.id}} button:before{
+    background: {{ collection_primaryColor }};
+  }
+  .meta-btnColor-{{collection.id}} button:hover:before{
+    filter: brightness(0.6);
   }
   {% endif %}
   
