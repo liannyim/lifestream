@@ -15,15 +15,29 @@ $(document).ready(function () {
         //variant pricing update
         // var variantID = $('.product-single__meta-worth').data('variant');
         var selectedVariant = '';
-        var variantID = '';
-        
+       
         $(".selector-wrapper input[type=radio]").click(function() {
             selectedVariant = $(":checked").data('variant');
+            $('.product-single__meta-worth').addClass('hide');
             $('.product-single__meta-worth').each(function( ) {
-                updateVariantPricing($(this),$('.product-single__meta-worth'),selectedVariant);
+                var variantID = $(this).data('variant');
+               
+                if(variantID == selectedVariant){
+                    
+                    if($(this).hasClass('hide')){
+                        $(this).removeClass('hide');
+                    }
+                }
             });
+            $('.product-single__meta-saving').addClass('hide');
             $('.product-single__meta-saving').each(function( ) {
-                updateVariantPricing($(this),$('.product-single__meta-saving'),selectedVariant);
+                var variantID = $(this).data('variant');
+                
+                if(variantID == selectedVariant){
+                    if($(this).hasClass('hide')){
+                        $(this).removeClass('hide');
+                    }
+                }
             });
         });
 
@@ -42,14 +56,7 @@ $(document).ready(function () {
          });
     }
 
-    //update Variant Pricing Worth and Saving
-    function updateVariantPricing($this,element,selectedVariant){
-        variantID = $this.data('variant') 
-        if(variantID == selectedVariant){
-            element.addClass('hide');
-            $this.removeClass('hide');
-        }
-    }
+   
 
     //sticky addToCart
     $('#js-sticky-btn').click(function() {

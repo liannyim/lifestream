@@ -1,7 +1,7 @@
 {% if product.variants.size > 1 %}
     {% if current_variant.metafields.pricing.worth != blank %}
         {% for variant in product.variants %}
-            <span class="product-single__meta-worth product-single__meta-worth-{{collection.id}} {% if variant != current_variant %}hide{% endif %}"
+            <span class="product-single__meta-worth product-single__meta-worth-{{collection.id}}{% if variant != current_variant %} hide{% endif %}"
                     data-variant="{{ variant.id }}">
                 {{ variant.metafields.pricing.worth }}
             </span>
@@ -26,7 +26,7 @@
     {% if current_variant.metafields.pricing.save != blank %}
         {% for variant in product.variants %}
             <span
-                    class="product-single__meta-saving product-single__meta-saving-{{collection.id}} {% if variant != current_variant %}hide{% endif %}"
+                    class="product-single__meta-saving product-single__meta-saving-{{collection.id}}{% if variant != current_variant %} hide{% endif %}"
                     data-variant="{{ variant.id }}">
                     {{ variant.metafields.pricing.save }}
             </span>
