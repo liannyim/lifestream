@@ -14,7 +14,7 @@
     .sticky-cart-wr{
       position: fixed;
       width: 100%;
-      padding:10px 0;
+      padding: 15px 0;
       bottom: 0;
       z-index: 999;
       background: var(--sticky-cart-mix);
@@ -36,9 +36,15 @@
       -ms-transform: translateY(100%) !important;
       transform: translateY(100%) !important;
     }
+    .sticky-cart-wr .product-form__quantity-submit {
+      padding-top: 0;
+      align-items: flex-start;
+    }
     #js-sticky-btn{
       background:var(--sticky-cart-bg);
       color:var(--sticky-cart-cl);
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
     }
     #js-sticky-prd{
       display: -webkit-box;
@@ -54,9 +60,11 @@
       flex-wrap: wrap;
       position:relative;
     }
-    #js-sticky-prd h3{
+    #js-sticky-prd h3 {
       font-size: 20px;
+      line-height: normal;
       max-width: 500px;
+      margin-bottom: 3px !important;
       overflow: hidden;
       -o-text-overflow: ellipsis;
       text-overflow: ellipsis;
@@ -170,15 +178,15 @@
         {% endif %}
       </div>
     </div>
-        
+
       <div class="js-product-form product-form__quantity-submit d-flex">
         <div class="product-form__item js-product-form__item--quantity">
           <label class="hide" for="Quantity">{{ 'products.product.quantity' | t }}</label>
           <input type="number" id="Quantity" name="quantity" value="1" min="1" class="product-form__input product-form__quantity">
         </div>
           <button id="js-sticky-btn" {% unless current_variant.available %}disabled="disabled"{% endunless %}
-                  class="btn btn-theme my-2 ml-auto" 
-                  
+                  class="btn btn-theme my-2 ml-auto"
+
                   data-buttonid="AddToCart-{{ section.id }}">
             {%- unless current_variant.available -%}
             {{ 'products.product.sold_out' | t }}

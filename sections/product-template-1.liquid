@@ -98,7 +98,7 @@
   }
 
 
-  
+
 
   {% if collection_primaryColor != blank %}
 
@@ -128,7 +128,7 @@
     filter: brightness(0.6);
   }
   {% endif %}
-  
+
   @media (max-width:1100px) {
     #shopify-section-{{ section.id }} .product-single__info-wrapper{
       padding:0rem 0rem 0rem 0rem;
@@ -260,7 +260,7 @@
               {% endif %}
             </div>
             <ul class="pb-3 product-single__meta-list list--inline{% if shop.taxes_included or shop.shipping_policy.body != blank %} product-single__price-container{% endif %}">
-              <li>  
+              <li>
                 {% include 'product-info-price' %}
 
               </li>
@@ -366,6 +366,7 @@
             </div>
           {% endif %}
 
+          {% if settings.enable_compare or settings.enable_wishlsit or section.settings.social_sharing_products %}
           <div class="gr-btnjs py-4 mt-4 border-top">
             <div class="d-flex align-items-center">
               <div>
@@ -395,11 +396,12 @@
             {% endif %}
 
           </div>
+          {% endif %}
           {% endform %}
           {% include 'notifySoldoutProduct' %}
         {% endif %}
 
-
+        {% if section.settings.product_vendor_enable or section.settings.product_type_enable or section.settings.variant_sku_enable or settings.safe_checkout_detail != blank %}
         <div class="row text-left pt-2">
           <div class="product-single__information col text-uppercase">
             {% if section.settings.product_vendor_enable %}
@@ -421,6 +423,7 @@
           </div>
           {% endif %}
         </div>
+        {% endif %}
         {% include 'fake-viewer' %}
         {% include 'free-shipping' %}
         {% include 'shipping-time' %}
@@ -469,7 +472,7 @@
   {%- include 'next-prev-product' -%}
   {%- include 'photoswipe' -%}
   {%- include 'sticky-cart' -%}
-  </script> 
+  </script>
 </div>
 
 
