@@ -55,7 +55,7 @@ $(document).ready(function () {
     $('#js-sticky-btn').click(function() {
         let variant = $(".selector-wrapper input[type=radio]:checked").data('variant');
         let qty = $('.js-product-form__item--quantity #Quantity').val();
-        console.log("adding to cart",variant,qty);
+       
         data = {
             "id": variant,
             "quantity": qty,
@@ -67,8 +67,12 @@ $(document).ready(function () {
             dataType: 'json',
             success: function () {
               jQuery.getJSON('/cart.js', function (cart) {
-                theme.miniCart.updateElements();
-                theme.miniCart.generateCart();
+                var styleCart = $('.js-mini-cart').attr("data-cartmini");
+                    theme.miniCart.updateElements();
+                    theme.miniCart.generateCart();
+                    $('.js-mini-cart').removeClass('active').addClass('hide');
+                    $('#jsCrosssell').addClass('show');
+                    
               });
             },
             complete: function () {
@@ -76,5 +80,9 @@ $(document).ready(function () {
             }
           });
        
+    });
+
+    $('#jsCrosssell button.close').click(function() {
+        $('#jsCrosssell').removeClass('show');
     });
 });
