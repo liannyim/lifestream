@@ -9634,3 +9634,131 @@ a.text-primary{
     width: 25%;
   } 
 }
+
+/*================ PDP - AddToCartBar ================*/
+
+.sticky-cart-wr{
+  min-height: 117px;
+  .product-single__description{
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19px;
+    letter-spacing: 0em;
+    text-align: left;
+  }
+}
+
+.js-sticky-info-inner{
+  width: 40%;
+  display: flex;
+  justify-content: center;
+}
+
+.js-product-form{
+  width: 60%;
+  @include media-query($medium-down){
+    width: 100%;
+  }
+}
+
+@include media-query($medium-up){
+  .js-sticky-prd-headings-wrapper{
+    width: 45%;
+  }
+  .js-sticky-prd-info-wrapper{
+    width: 55%;
+    display: flex;
+    flex-direction: row;
+  }
+} 
+@include media-query($small){
+  .js-sticky-prd-headings-wrapper{
+    display: none;
+    flex-direction: column;
+  }
+  .js-sticky-prd-info-wrapper{
+    flex-direction: column;
+    width: 100%;
+  }
+  .js-sticky-info-inner,
+  .js-product-form{
+    width: 100%;
+  }
+
+  .js-sticky-info-inner{
+    flex-direction: row-reverse;
+    justify-content: space-between;
+  }
+
+  #js-sticky-price{
+    text-align: right;
+  }
+
+  .product-single__meta-worth{
+    position: absolute!important;
+    left: 30%;
+  }
+
+  .product-single__meta-saving{
+    position: absolute;
+    right: 6%;
+  }
+}
+@include media-query($large-down){
+  .product-single__meta-worth{
+    font-size: 11px!important;
+  }
+  .product-single__meta-saving{
+    font-size: 12px!important;
+  }
+}
+
+.js-sticky-worth-wrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 14px;
+
+  .product-single__meta-worth{
+    position: relative;
+    top: unset;
+    right: unset;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 18px;
+    letter-spacing: 0.1em;
+    text-align: left;
+  }
+}
+
+.js-sticky-price-wrapper{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  #js-sticky-price{
+    font-size: 25px;
+    font-weight: 600;
+    line-height: 30px;
+    letter-spacing: 0.1em;
+    text-align: right;
+
+  }
+  .product-single__meta-saving{
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20px;
+    letter-spacing: 0.1em;
+    text-align: left;
+  }
+}
+
+#js-sticky-btn{
+  width: 100%;
+}
+
+@media screen and (max-width: 320px) {
+  .product-single__meta-worth{
+    left: 35%;
+  }
+}
+

@@ -18,7 +18,7 @@ $(document).ready(function () {
         var variantID = '';
         
         $(".selector-wrapper input[type=radio]").click(function() {
-            selectedVariant = $(":checked").data('variant')
+            selectedVariant = $(":checked").data('variant');
             $('.product-single__meta-worth').each(function( ) {
                 updateVariantPricing($(this),$('.product-single__meta-worth'),selectedVariant);
             });
@@ -50,4 +50,31 @@ $(document).ready(function () {
             $this.removeClass('hide');
         }
     }
+
+    //sticky addToCart
+    $('#js-sticky-btn').click(function() {
+        let variant = $(".selector-wrapper input[type=radio]:checked").data('variant');
+        let qty = $('.js-product-form__item--quantity #Quantity').val();
+        console.log("adding to cart",variant,qty);
+        data = {
+            "id": variant,
+            "quantity": qty,
+        }
+        jQuery.ajax({
+            type: 'POST',
+            url: '/cart/add.js',
+            data: data,
+            dataType: 'json',
+            success: function () {
+              jQuery.getJSON('/cart.js', function (cart) {
+                theme.miniCart.updateElements();
+                theme.miniCart.generateCart();
+              });
+            },
+            complete: function () {
+                // $('.js-mini-cart').addClass('active');
+            }
+          });
+       
+    });
 });
