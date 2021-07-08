@@ -11,6 +11,23 @@ $(document).ready(function () {
                 $('.product__value-props').css("justify-content","space-between");
             }
         }
+        
+        //variant pricing update
+        // var variantID = $('.product-single__meta-worth').data('variant');
+        var selectedVariant = '';
+        var variantID = '';
+        
+        $(".selector-wrapper input[type=radio]").click(function() {
+            selectedVariant = $(":checked").data('variant')
+            $('.product-single__meta-worth').each(function( ) {
+                updateVariantPricing($(this),$('.product-single__meta-worth'),selectedVariant);
+            });
+            $('.product-single__meta-saving').each(function( ) {
+                updateVariantPricing($(this),$('.product-single__meta-saving'),selectedVariant);
+            });
+        });
+
+
         //sticky-cart will slides up when reached end of main product div
          var heightThreshold_end  = $(".product-single").height();
         
@@ -23,5 +40,14 @@ $(document).ready(function () {
                  $('.sticky-cart-wr').removeClass('active');
              }
          });
+    }
+
+    //update Variant Pricing Worth and Saving
+    function updateVariantPricing($this,element,selectedVariant){
+        variantID = $this.data('variant') 
+        if(variantID == selectedVariant){
+            element.addClass('hide');
+            $this.removeClass('hide');
+        }
     }
 });
