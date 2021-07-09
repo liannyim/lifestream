@@ -162,7 +162,7 @@
   <meta itemprop="brand" content="{{ product.vendor }}">
 
   <div class="row product-single">
-    <div class="col-md-6">
+    <div class="col-md-5">
       <div class="photos">
 
         <div class="photos__item photos__item--main " >
@@ -240,7 +240,7 @@
         {% endif %}
       </div>
     </div>
-    <div class="col-12 col-md-6 order-1" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+    <div class="col-12 col-md-7 order-1" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
       <div class="product-single__info-wrapper">
         <meta itemprop="priceCurrency" content="{{ shop.currency }}">
         <link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
