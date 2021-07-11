@@ -9868,24 +9868,26 @@ a.text-primary{
 }
 .blog-articles{
   display: flex;
-  padding: 0 50px;
-  @include media-query($medium-down){
-    padding: 0 20px;
-  }
+
   .card__info{
     text-align: center;
   }
+
   .card__image-wrapper{
     display: flex;
     justify-content: center;
-    width: auto;
+    width: 420px;
     height: 420px;
     max-height: 420px;
-    @include media-query($medium-down){
+    position: relative;
+    margin: auto;
+    @include media-query($large-down){
+      width: auto;
       height: 342px;
     }
 
     img{
+      width: 100%;
       object-fit: cover;
     }
   }
@@ -9908,6 +9910,21 @@ a.text-primary{
   }
   .slick-next{
     right: -15px;
+  }
+}
+.card-list{
+  overflow: hidden;
+  max-width: 420px;
+}
+@include media-query($medium-down){
+  .card-list{
+    max-width: inherit;
+  }  
+}
+
+@include media-query($widescreen){
+  .blog-articles{
+   justify-content: space-evenly;
   }
 }
 
