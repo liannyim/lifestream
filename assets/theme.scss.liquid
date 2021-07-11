@@ -3711,7 +3711,6 @@ $slick-opacity-not-active: 0.25;
   overflow: hidden;
 }
 .product-card__image {
-  position: relative;
   margin: 0 auto;
   display:block;
   &:after{
@@ -9869,7 +9868,10 @@ a.text-primary{
 }
 .blog-articles{
   display: flex;
-
+  padding: 0 50px;
+  @include media-query($medium-down){
+    padding: 0 20px;
+  }
   .card__info{
     text-align: center;
   }
@@ -9907,4 +9909,145 @@ a.text-primary{
   .slick-next{
     right: -15px;
   }
+}
+
+/*================ PDP - What's in the Box ================*/
+.template-product #ProductSection-product-template-1.container-fluid{
+  padding: 0;
+  
+  .product-single{
+    padding: 0 50px;
+  }
+}
+#bundled-products{
+  width: 100%;
+  padding-bottom: 4%;
+
+  .product-tile{
+    width: 1000px;
+    position: relative;
+    margin: auto auto 6%;
+    display: flex;
+    justify-content: center;
+
+    &:nth-child(even){
+      flex-direction: row-reverse;
+     .product-tile__image-wrapper{
+        margin-right: 0px;
+        margin-left: 40px;
+      }
+     .product-tile__info{
+        text-align: right;
+      }
+    }
+  }
+
+  .product-tile__image-wrapper{
+    margin-right: 40px;
+    width: 30%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-bottom: 4%;
+  }
+  .product-tile__info{
+    width: 70%;
+  }
+
+  .product-card__image{
+    height: inherit;
+    position: relative;
+      img{
+        position: relative;
+        height: inherit;
+        object-fit: cover;
+      }
+  }
+
+  .product-tile__volume{
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 15px;
+    letter-spacing: 0.1em;
+    color: #797979;
+    text-transform: uppercase;
+  }
+}
+
+@include media-query($medium-down){
+  .product-tile{
+    flex-direction: column;
+    padding: 0 50px;
+    
+
+    &:nth-child(even){
+      flex-direction: column!important;
+      .product-tile__info{
+        text-align: unset;
+      }
+      .product-tile__image-wrapper{
+        margin-right: 0;
+        margin-left: 0!important;
+      }
+      .product-tile__info{
+        text-align: center!important;
+      }
+    }
+    
+  }
+
+  .product-tile,
+  .product-tile__image-wrapper,
+  .product-tile__info{
+    width: 100%!important;
+  }
+
+  .product-tile__image-wrapper {
+    margin-right: 0;
+    height: 400px;
+    margin-bottom: 50px;
+  }
+
+  .product-tile__info{
+    text-align: center;
+    .product-tile__title span{
+      font-size: 20px;
+      line-height: 24px;
+    }
+  }
+
+  .product-tile__title{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+
+  .product-tile__description{
+    font-size: 14px!important;
+    line-height: 16px!important;
+  }
+}
+
+.product-tile__title span{
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 33px;
+  text-align: left;
+}
+.product-single__instruction{
+  font-size: 16px;
+  font-style: italic;
+  font-weight: 300;
+  line-height: 18px;
+  color: #797979;
+}
+
+.product-tile__description{
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 22px;
 }

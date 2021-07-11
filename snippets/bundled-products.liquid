@@ -1,0 +1,80 @@
+<style>
+    #bundled-products{
+        width: 100%;
+        height: 100%;
+    }
+    .bundled-products_bg-{{ collection_id }}{
+        background-color: {{ collection_primaryColor }};
+        opacity: 0.1;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+    #bundled-products .heading{
+        margin: 100px 0 40px;
+        position: relative;
+    }
+    .rhs_bundled_bg,
+    .lhs_bundled_bg{
+        position: absolute;
+        background-size: cover;
+        width: 363px;
+        max-height: 736px;
+        background-repeat: no-repeat;
+        height: 100%;
+    }
+
+    .rhs_bundled_bg{
+        top: 0;
+        right: 0;
+        background-image: url({{ block.settings.rhs_bundled_bg | img_url: 'master' }});
+    }
+    
+    .lhs_bundled_bg{
+        bottom: 0;
+        left: 0;
+        background-image: url({{ block.settings.lhs_bundled_bg | img_url: 'master' }});
+    }
+
+    .product-card__image-eclipse-{{ collection_id }}{
+        width: 230px;
+        height: 230px;
+        position: absolute;
+        top: 80%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+        background-color: {{ collection_primaryColor }};
+    }
+</style>
+{% assign custom_bundled = product.metafields.bundled.product %}
+
+{% if product.metafields.bundled.product != blank %}
+<div class="section-block" id="bundled-products">
+    <div class="section-block bundled-products_bg-{{ collection_id }}"></div>
+    {% if block.settings.lhs_bundled_bg != blank %}
+        <div class="lhs_bundled_bg"></div>
+    {% endif %}
+    {% if block.settings.rhs_bundled_bg != blank %}
+        <div class="rhs_bundled_bg"></div>
+    {% endif %}
+
+        {% if block.settings.heading != blank %}
+            <h3 class="heading text-center" style="color: {{ collection_primaryColor }}">
+                {{ block.settings.heading }}
+            </h3>
+        {% endif %}
+        {% for custom_prd in product.metafields.bundled.product %}
+
+            {% assign custom_prds = custom_prd | split: '|' | join: ',' | split: ',' %}
+            
+              {% for handle in custom_prds %}
+                {% if all_products[handle].title != blank %}
+                  {%- include 'product-tile' product:  all_products[handle]  -%}
+                {% endif %}
+            {% endfor %}
+          {% endfor %}
+</div>
+{% endif %}

@@ -103,10 +103,11 @@
     color: {{ collection_primaryColor }}!important;
   }
 
+  .product-tile__title span,
   .product-single__meta-saving-{{ collection_id }} {
     color: {{ collection_primaryColor }};
   }
-
+  #bundled-products .product-tile__link a,
   #blogs .card__read-more{
     color: {{ collection_primaryColor }}!important;
     border-bottom-color: {{ collection_primaryColor }}!important;
@@ -116,7 +117,8 @@
   .sticky-cart-{{ collection_id }} #js-sticky-btn,
   .meta-btnColor-{{collection_id}} .btn-theme{
     background: {{ collection_primaryColor }} !important;
-  }
+  } 
+
 
  
   .btn-theme-{{ collection_id }}:before,
@@ -126,10 +128,11 @@
     background: {{ collection_primaryColor }};
   }
 
+  #bundled-products .product-tile__link a:hover,
   #blogs .card__read-more:hover{
     filter: brightness(0.6);
   }
-  
+
   #story-block .wrapper-{{ collection_id }} a.btn-theme:hover{
     color: #FEFEFE;
   }
@@ -141,6 +144,7 @@
   #story-block .wrapper-{{ collection_id }} a.btn-theme:hover:before{
     filter: brightness(0.6);
   }
+  
   {% endif %}
 
   @media (max-width:1100px) {
@@ -167,7 +171,7 @@
   }
 
 </style>
-<div class="container js-recently-view" itemscope itemtype="http://schema.org/Product" id="ProductSection-{{ section.id }}" data-section-id="{{ section.id }}" data-section-type="product" data-enable-history-state="true" data-ajax="true" data-stock="{{ section.settings.stock_enable }}" data-handle="{{product.handle}}">
+<div class="container-fluid js-recently-view" itemscope itemtype="http://schema.org/Product" id="ProductSection-{{ section.id }}" data-section-id="{{ section.id }}" data-section-type="product" data-enable-history-state="true" data-ajax="true" data-stock="{{ section.settings.stock_enable }}" data-handle="{{product.handle}}">
   {% assign product_image_size = '480x480' %}
   {% assign current_variant = product.selected_or_first_available_variant %}
   <meta itemprop="name" content="{{ product.title }}">
@@ -455,8 +459,11 @@
       </div>
     </div>
   </div>
+ 
   {% if section.settings.positiontab == "bottom" %}
-    <div class="container px-0">
+    
+   
+    <div class="container-fluid px-0">
         <div class="row justify-content-md-center">
             <div class="col-lg-9 col-12">
             {% if section.settings.enable_tabvertical %}
@@ -478,6 +485,8 @@
           {%- include 'related-products' -%}
         {% elsif block.type == 'service' %}
         {%- include 'service-pro' -%}
+        {% elsif block.type == 'bundled' %}
+        {%- include 'bundled-products' -%}
       {% endif %}
       {% endfor %}
     </div>
@@ -495,7 +504,7 @@
   {% if block.type == 'story-block' %}
     {%- include 'story-block' story: block -%}
   {% elsif block.type == 'blog' %}
-    <div class="container">
+    <div class="container-fluid">
       <div class="row" >
         {%- include 'blog-product' -%}
       </div>
@@ -975,6 +984,37 @@
               "type": "url",
               "id": "button_link",
               "label": "Button link"
+          }
+        ]
+      },
+      {
+        "type": "bundled",
+        "name": "What's in the Box",
+        "limit": 1,
+        "settings": [
+          {
+              "type": "text",
+              "id": "heading",
+              "label": "Heading",
+              "default": "What's in the Box"
+          },
+          {
+            "type": "image_picker",
+            "id": "rhs_bundled_bg",
+            "label": "Background Image (RHS)"
+          },
+          {
+            "type": "image_picker",
+            "id": "lhs_bundled_bg",
+            "label": "Background Image (LHS)"
+          },
+          {
+            "type": "header",
+            "content": "Bundled Products settings"
+          },
+          {
+            "type": "paragraph",
+            "content": "💡 [Add products and edit content here.](\/admin\/apps/arena-custom-fields/products_editor)"
           }
         ]
       },
