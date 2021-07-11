@@ -13,8 +13,8 @@
         {% capture collection_primaryColor %} {{ collection.metafields.colors.primary }}{% endcapture %}
       {% endif %}  
       {% elsif collections_title == tag_lowercase %}
-        {% capture collectionid | remove: " " %} {{product.collections[1].id }}{% endcapture %}
-        {% if collection.metafields.colors.primary != blank %}
+        {% capture collectionid | remove: " " %} {{ product.collections[1].id }}{% endcapture %}
+        {% if collection.metafields.colors.primary != blank and product.collections[1].handle != 'all'%}
           {% capture collection_primaryColor %} {{ product.collections[1].metafields.colors.primary }}{% endcapture %}
         {% endif %}
     {% endif %}  
