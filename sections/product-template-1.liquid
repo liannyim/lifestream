@@ -487,6 +487,10 @@
         {%- include 'service-pro' -%}
         {% elsif block.type == 'bundled' %}
         {%- include 'bundled-products' -%}
+        {% elsif block.type == 'blog' %}
+        {%- include 'blog-product' -%}
+        {% elsif block.type == 'story-block' %}
+          {%- include 'story-block' story: block -%}
       {% endif %}
       {% endfor %}
     </div>
@@ -499,18 +503,6 @@
   </script>
 </div>
 
-
-{% for block in section.blocks %}
-  {% if block.type == 'story-block' %}
-    {%- include 'story-block' story: block -%}
-  {% elsif block.type == 'blog' %}
-    <div class="container-fluid">
-      <div class="row" >
-        {%- include 'blog-product' -%}
-      </div>
-    </div>
-  {% endif %}
-{% endfor %}
 
 
 {% schema %}
