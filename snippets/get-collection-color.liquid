@@ -1,14 +1,24 @@
+{% assign current_collection = collection.title | downcase  %}
+{% assign collections_handle = collection.id | downcase  %}
+
 {% for collection in product.collections %}
-    {% assign collections_title = collection.title | downcase %}
-    {% for tagname in product.tags %}
-      {% assign tag_lowercase = tagname | downcase %}
-      {% if collections_title == tag_lowercase %}
-        {% capture collectionid | remove: " " %} {{ collection.id }}{% endcapture %}
-        {% if collection.metafields.colors.primary != blank %}
-          {% capture collection_primaryColor %} {{ collection.metafields.colors.primary }}{% endcapture %}
-        {% endif %}  
-      {% endif %}  
-    {% endfor %}
-  {% endfor %}
-  {% assign collection_id = collectionid | remove: " " %}
+  {% assign collections_title = collection.title | downcase %}
+ 
+  {% for tagname in product.tags %}
+    {% assign tag_lowercase = tagname | downcase %}
   
+    {% if current_collection == tag_lowercase and current_collection == collections_title %}
+      {% capture collectionid | remove: " " %} {{ collections_handle }}{% endcapture %}
+      {% if collection.metafields.colors.primary != blank %}
+        {% capture collection_primaryColor %} {{ collection.metafields.colors.primary }}{% endcapture %}
+      {% endif %}  
+      {% elsif collections_title == tag_lowercase %}
+        {% capture collectionid | remove: " " %} {{product.collections[1].id }}{% endcapture %}
+        {% if collection.metafields.colors.primary != blank %}
+          {% capture collection_primaryColor %} {{ product.collections[1].metafields.colors.primary }}{% endcapture %}
+        {% endif %}
+    {% endif %}  
+  {% endfor %}
+{% endfor %}
+
+{% assign collection_id = collectionid | remove: " " %}

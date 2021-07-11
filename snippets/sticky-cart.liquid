@@ -126,7 +126,7 @@
     .disable #js-sticky-close .icon-close+.icon{display:block}
   </style>
 <div id="js-anchor-sticky-cart"></div>
-  <div class="sticky-cart-wr shadow d-flex sticky-cart-{{ collection.id}}" >
+  <div class="sticky-cart-wr shadow d-flex sticky-cart-{{ collection_id}}" >
     <div id="js-sticky-prd" class="container-fluid align-self-center">
       <div class="js-sticky-prd-headings-wrapper">
         <img id="js-sticky-img" src="{{product.featured_image | img_url: '200x'}}" />
@@ -143,7 +143,7 @@
           {% if product.variants.size > 1 %}
             {% if current_variant.metafields.pricing.worth != blank %}
                 {% for variant in product.variants %}
-                    <span class="product-single__meta-worth product-single__meta-worth-{{collection.id}} {% if variant != current_variant %}hide{% endif %}"
+                    <span class="product-single__meta-worth product-single__meta-worth-{{collection_id}} {% if variant != current_variant %}hide{% endif %}"
                             data-variant="{{ variant.id }}">
                         {{ variant.metafields.pricing.worth }}
                     </span>
@@ -151,7 +151,7 @@
             {% endif %}
         {% else %}
             {% if product.metafields.info.worth != blank %}
-                <span class="product-single__meta-worth product-single__meta-worth-{{collection.id}}">
+                <span class="product-single__meta-worth product-single__meta-worth-{{collection_id}}">
                     {{ product.metafields.info.worth }}
                 </span>
             {% endif %}
@@ -164,14 +164,14 @@
         {% if product.variants.size > 1 %}
           {% if current_variant.metafields.pricing.save != blank %}
             {% for variant in product.variants %}
-              <span class="product-single__meta-saving product-single__meta-saving-{{collection.id}} {% if variant != current_variant %}hide{% endif %}" data-variant="{{ variant.id }}" >
+              <span class="product-single__meta-saving product-single__meta-saving-{{collection_id}} {% if variant != current_variant %}hide{% endif %}" data-variant="{{ variant.id }}" >
                 {{ variant.metafields.pricing.save }}
               </span>
             {% endfor %}
           {% endif %}
         {% else %}
           {% if product.metafields.info.save != blank %}
-            <span class="product-single__meta-saving product-single__meta-saving-{{collection.id}}">
+            <span class="product-single__meta-saving product-single__meta-saving-{{collection_id}}">
             {{product.metafields.info.save}}
             </span>
           {% endif %}
