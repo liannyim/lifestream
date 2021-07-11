@@ -106,13 +106,19 @@
   .product-single__meta-saving-{{ collection_id }} {
     color: {{ collection_primaryColor }};
   }
-  
+
+  #blogs .card__read-more{
+    color: {{ collection_primaryColor }}!important;
+    border-bottom-color: {{ collection_primaryColor }}!important;
+  }
+
   .btn-theme-{{ collection_id }},
   .sticky-cart-{{ collection_id }} #js-sticky-btn,
   .meta-btnColor-{{collection_id}} .btn-theme{
     background: {{ collection_primaryColor }} !important;
   }
 
+ 
   .btn-theme-{{ collection_id }}:before,
   .sticky-cart-{{ collection_id }} #js-sticky-btn:before,
   .meta-btnColor-{{collection_id}} .btn-theme:before,
@@ -120,10 +126,15 @@
     background: {{ collection_primaryColor }};
   }
 
+  #blogs .card__read-more:hover{
+    filter: brightness(0.6);
+  }
+  
   #story-block .wrapper-{{ collection_id }} a.btn-theme:hover{
     color: #FEFEFE;
   }
 
+  
   .btn-theme-{{ collection_id }}:hover:before,
   .sticky-cart-{{ collection_id }} #js-sticky-btn:hover:before,
   .meta-btnColor-{{collection_id}} .btn-theme:hover:before,
@@ -998,8 +1009,8 @@
           },
           {
             "type": "paragraph",
-            "content": "💡 [Choose blog posts to be displayed here.](\/admin\/apps/arena-custom-fields/products_editor)"
-          },
+            "content": "💡 [Choose blog to be displayed here.](\/admin\/apps/arena-custom-fields/products_editor)"
+          }
         ]
       },
       {

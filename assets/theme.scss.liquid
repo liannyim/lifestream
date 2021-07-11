@@ -9851,3 +9851,60 @@ a.text-primary{
     height: 100vh!important;
   }
 }
+
+/*================ PDP - Blogs ================*/
+
+#blogs{
+  width: 100%;
+  margin: 100px 0 60px;
+
+  .section-subtitle{
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+    letter-spacing: .1em;
+    text-align: center;
+    text-transform: uppercase;
+  }
+}
+.blog-articles{
+  display: flex;
+
+  .card__info{
+    text-align: center;
+  }
+  .card__image-wrapper{
+    display: flex;
+    justify-content: center;
+    width: auto;
+    height: 420px;
+    max-height: 420px;
+    @include media-query($medium-down){
+      height: 342px;
+    }
+
+    img{
+      object-fit: cover;
+    }
+  }
+
+  .card__name{
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 29px;
+    margin: 30px 10px 20px;
+  }
+
+  .card__excerpt{
+    color: #797979;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 22px;
+  }
+  .slick-prev{
+    left: -15px;
+  }
+  .slick-next{
+    right: -15px;
+  }
+}

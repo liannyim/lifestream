@@ -56,6 +56,19 @@ $(document).ready(function () {
                  $('.sticky-cart-wr').addClass('disable');
              }
          });
+
+         //Blog slider on mobile
+         $('.blog-articles').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            mobileFirst: true,
+            responsive: [
+                  {
+                          breakpoint: 768,
+                          settings: 'unslick'
+                  }
+            ]
+          });
     }
 
 
