@@ -1,5 +1,5 @@
 <!-- product-template-1.liquid -->
-{% assign collection_primaryColor = collection.metafields.colors.primary %}
+{% include 'get-collection-color' %}
 <style>
   .modal-backdrop.show{
     display:none !important;
@@ -97,34 +97,37 @@
     max-width: 50%;
   }
 
-
-
-
   {% if collection_primaryColor != blank %}
 
   .g-breadcrumb a:hover{
     color: {{ collection_primaryColor }}!important;
   }
 
-  .product-single__meta-saving-{{collection.id}} {
+  .product-single__meta-saving-{{ collection_id }} {
     color: {{ collection_primaryColor }};
   }
+  
+  .btn-theme-{{ collection_id }},
+  .sticky-cart-{{ collection_id }} #js-sticky-btn,
+  .meta-btnColor-{{collection_id}} .btn-theme{
+    background: {{ collection_primaryColor }} !important;
+  }
 
-  .btn-theme-{{ collection.id }},
-  .sticky-cart-{{ collection.id }} #js-sticky-btn,
-  .meta-btnColor-{{collection.id}} .btn-theme{
+  .btn-theme-{{ collection_id }}:before,
+  .sticky-cart-{{ collection_id }} #js-sticky-btn:before,
+  .meta-btnColor-{{collection_id}} .btn-theme:before,
+  #story-block .wrapper-{{ collection_id }} a.btn-theme:before{
     background: {{ collection_primaryColor }};
   }
 
-  .btn-theme-{{ collection.id }}:before,
-  .sticky-cart-{{ collection.id }} #js-sticky-btn:before,
-  .meta-btnColor-{{collection.id}} .btn-theme:before{
-    background: {{ collection_primaryColor }};
+  #story-block .wrapper-{{ collection_id }} a.btn-theme:hover{
+    color: #FEFEFE;
   }
-
-  .btn-theme-{{ collection.id }}:hover:before,
-  .sticky-cart-{{ collection.id }} #js-sticky-btn:hover:before,
-  .meta-btnColor-{{collection.id}} .btn-theme:hover:before{
+  
+  .btn-theme-{{ collection_id }}:hover:before,
+  .sticky-cart-{{ collection_id }} #js-sticky-btn:hover:before,
+  .meta-btnColor-{{collection_id}} .btn-theme:hover:before,
+  #story-block .wrapper-{{ collection_id }} a.btn-theme:hover:before{
     filter: brightness(0.6);
   }
   {% endif %}
@@ -332,7 +335,7 @@
               <label class="hide" for="Quantity">{{ 'products.product.quantity' | t }}</label>
               <input type="number" id="Quantity" name="quantity" value="1" min="1" class="product-form__input product-form__quantity">
             </div>
-            <div class="product-form__item product-form__item--submit meta-btnColor-{{collection.id}} {% unless section.settings.enable_payment_button %} btn-disablebuynow {% endunless %}">
+            <div class="product-form__item product-form__item--submit meta-btnColor-{{ collection_id }} {% unless section.settings.enable_payment_button %} btn-disablebuynow {% endunless %}">
               <button type="submit"
                       name="add"
                       id="AddToCart-{{ section.id }}"
@@ -467,6 +470,7 @@
       {% endif %}
       {% endfor %}
     </div>
+    
   {%- include 'cross-sell' -%}
   {%- include 'upsell' -%}
   {%- include 'next-prev-product' -%}
@@ -475,6 +479,12 @@
   </script>
 </div>
 
+
+{% for block in section.blocks %}
+  {% if block.type == 'story-block' %}
+    {%- include 'story-block' story: block -%}
+  {% endif %}
+{% endfor %}
 
 
 {% schema %}
@@ -906,6 +916,48 @@
             "id": "dots",
             "label": "Dots",
             "default": true
+          }
+        ]
+      },
+      {
+        "type": "story-block",
+        "name": "Story Block",
+        "limit": 1,
+        "settings": [
+          {
+              "type": "image_picker",
+              "id": "image",
+              "label": "Image"
+          },
+          {
+              "type": "text",
+              "id": "top_title",
+              "label": "Top title"
+          },
+          {
+              "type": "text",
+              "id": "heading",
+              "label": "Heading"
+          },
+          {
+              "type": "text",
+              "id": "content",
+              "label": "Content"
+          },
+          {
+              "type": "textarea",
+              "id": "description",
+              "label": "Description"
+          },
+          {
+              "type": "text",
+              "id": "button_label",
+              "label": "Button label"
+          },
+          {
+              "type": "url",
+              "id": "button_link",
+              "label": "Button link"
           }
         ]
       },

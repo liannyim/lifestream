@@ -1,4 +1,4 @@
-
+{% include 'get-collection-color' %}
 <div class="customstyle{{ block.id }} {{block.settings.setwidthcontent}}" data-aos="fade-up">
   <style>
     .bg-herovideo{
@@ -36,7 +36,7 @@
   
         {%- if block.settings.button != blank and block.settings.link != blank -%}
         <div class="parallax-banner__btn">
-          <a href="{{ block.settings.link }}" class="btn btn-theme gradient-theme btn-theme-{{ collection.id }}">
+          <a href="{{ block.settings.link }}" class="btn btn-theme gradient-theme btn-theme-{{ collection_id }}">
             {{ block.settings.button | escape }}
           </a>
         </div>

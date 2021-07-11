@@ -9789,3 +9789,65 @@ a.text-primary{
   letter-spacing: 0em;
   text-align: center;
 }
+
+/*================ PDP - Story Block ================*/
+
+#story-block{
+  width: 100%;
+  min-height: 600px;
+  display: flex;
+}
+
+.story-block-img-wrapper,
+.story-block-content{
+    width: 50%;
+}
+
+.story-block-content,
+.story-block-content-details{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 30.5px;
+
+  .subtop{
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 16px;
+  letter-spacing: 0.1em;
+  text-align: center;
+  text-transform: uppercase;
+  }
+
+  .heading{
+    font-family: Gilroy;
+    font-size: 38px;
+    font-weight: 600;
+    line-height: 48px;
+    text-align: center;
+    color: #FEFEFE;
+  }
+  .desc{
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 22px;
+    text-align: center;
+    margin: 20px 0;
+  }
+}
+
+@include media-query($medium-down){
+  #story-block{
+    flex-direction: column;
+  }
+
+  .story-block-img-wrapper,
+  .story-block-content{
+      width: 100%;
+  }
+
+  .story-block-img{
+    height: 100vh!important;
+  }
+}
