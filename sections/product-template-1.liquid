@@ -117,10 +117,10 @@
   .sticky-cart-{{ collection_id }} #js-sticky-btn,
   .meta-btnColor-{{collection_id}} .btn-theme{
     background: {{ collection_primaryColor }} !important;
-  } 
+  }
 
 
- 
+
   .btn-theme-{{ collection_id }}:before,
   .sticky-cart-{{ collection_id }} #js-sticky-btn:before,
   .meta-btnColor-{{collection_id}} .btn-theme:before,
@@ -135,14 +135,14 @@
 
 
 
-  
+
   .btn-theme-{{ collection_id }}:hover:before,
   .sticky-cart-{{ collection_id }} #js-sticky-btn:hover:before,
   .meta-btnColor-{{collection_id}} .btn-theme:hover:before,
   #story-block .wrapper-{{ collection_id }} a.btn-theme:hover:before{
     filter: brightness(0.6);
   }
-  
+
   {% endif %}
 
   @media (max-width:1100px) {
@@ -457,10 +457,10 @@
       </div>
     </div>
   </div>
- 
+
   {% if section.settings.positiontab == "bottom" %}
-    
-   
+
+
     <div class="container-fluid px-0">
         <div class="row justify-content-md-center">
             <div class="col-lg-9 col-12">
@@ -492,7 +492,7 @@
       {% endif %}
       {% endfor %}
     </div>
-    
+
   {%- include 'cross-sell' -%}
   {%- include 'upsell' -%}
   {%- include 'next-prev-product' -%}
@@ -1013,11 +1013,6 @@
         "name": "Blog",
         "limit": 1,
         "settings": [
-          {
-              "type": "image_picker",
-              "id": "image",
-              "label": "Image"
-          },
           {
               "type": "text",
               "id": "top_title",

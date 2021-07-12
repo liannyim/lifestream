@@ -3821,6 +3821,10 @@ $slick-opacity-not-active: 0.25;
 
 .product-single {
   margin-bottom: 30px;
+
+  @include media-query($medium-up) {
+    margin-bottom: 120px;
+  }
 }
 
 /*================ Product meta ================*/
@@ -9811,18 +9815,18 @@ a.text-primary{
   padding: 30.5px;
 
   .subtop{
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 16px;
-  letter-spacing: 0.1em;
-  text-align: center;
-  text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16px;
+    letter-spacing: 0.1em;
+    text-align: center;
+    text-transform: uppercase;
   }
 
   .heading{
     font-family: Gilroy;
     font-size: 38px;
-    font-weight: 600;
+    font-weight: 500;
     line-height: 48px;
     text-align: center;
     color: #FEFEFE;
@@ -9894,7 +9898,7 @@ a.text-primary{
 
   .card__name{
     font-size: 24px;
-    font-weight: 600;
+    font-weight: 500;
     line-height: 29px;
     margin: 30px 10px 20px;
   }
@@ -9919,7 +9923,7 @@ a.text-primary{
 @include media-query($medium-down){
   .card-list{
     max-width: inherit;
-  }  
+  }
 }
 
 @include media-query($widescreen){
@@ -9931,21 +9935,35 @@ a.text-primary{
 /*================ PDP - What's in the Box ================*/
 .template-product #ProductSection-product-template-1.container-fluid{
   padding: 0;
-  
+
   .product-single{
     padding: 0 50px;
   }
 }
 #bundled-products{
   width: 100%;
-  padding-bottom: 4%;
+  padding-bottom: 80px;
+
+  .heading {
+    font-size: 32px;
+    margin-bottom: 40px;
+
+    @include media-query ($large-up) {
+      font-size: 50px;
+      margin-bottom: 80px !important;
+    }
+  }
 
   .product-tile{
     width: 1000px;
     position: relative;
-    margin: auto auto 6%;
+    margin: 0 auto;
     display: flex;
     justify-content: center;
+
+    @include media-query ($medium-up) {
+      align-items: center;
+    }
 
     &:nth-child(even){
       flex-direction: row-reverse;
@@ -9987,6 +10005,7 @@ a.text-primary{
     font-size: 12px;
     font-weight: 400;
     line-height: 15px;
+    padding-left: 15px;
     letter-spacing: 0.1em;
     color: #797979;
     text-transform: uppercase;
@@ -9997,7 +10016,7 @@ a.text-primary{
   .product-tile{
     flex-direction: column;
     padding: 0 50px;
-    
+
 
     &:nth-child(even){
       flex-direction: column!important;
@@ -10012,7 +10031,7 @@ a.text-primary{
         text-align: center!important;
       }
     }
-    
+
   }
 
   .product-tile,
@@ -10032,6 +10051,7 @@ a.text-primary{
     .product-tile__title span{
       font-size: 20px;
       line-height: 24px;
+      text-align: center;
     }
   }
 
@@ -10051,7 +10071,7 @@ a.text-primary{
 
 .product-tile__title span{
   font-size: 28px;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 33px;
   text-align: left;
 }
@@ -10061,10 +10081,15 @@ a.text-primary{
   font-weight: 300;
   line-height: 18px;
   color: #797979;
+  padding-top: 5px;
 }
 
 .product-tile__description{
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 400;
-  line-height: 22px;
+  line-height: 18px;
+
+  p {
+    line-height: 1.3;
+  }
 }

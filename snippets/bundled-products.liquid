@@ -31,13 +31,19 @@
         right: 0;
         background-image: url({{ block.settings.rhs_bundled_bg | img_url: 'master' }});
     }
-    
+
     .lhs_bundled_bg{
         bottom: 0;
         left: 0;
         background-image: url({{ block.settings.lhs_bundled_bg | img_url: 'master' }});
     }
 
+    @media only screen and (max-width: 750px) {
+      .rhs_bundled_bg,
+      .lhs_bundled_bg {
+        display: none;
+      }
+    }
     .product-card__image-eclipse-{{ collection_id }}{
         width: 230px;
         height: 230px;
@@ -69,7 +75,7 @@
         {% for custom_prd in product.metafields.bundled.product %}
 
             {% assign custom_prds = custom_prd | split: '|' | join: ',' | split: ',' %}
-            
+
               {% for handle in custom_prds %}
                 {% if all_products[handle].title != blank %}
                   {%- include 'product-tile' product:  all_products[handle]  -%}
