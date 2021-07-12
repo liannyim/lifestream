@@ -17,14 +17,14 @@
     </div>
 <div class="latest-blog-posts-wrapper">
     <div class="blog-articles col-12">
-{% if custom_articles %}
+{% if product.metafields.article.custom != blank %}
 
     {% for article_handle in custom_articles limit: how_many_articles_to_show %}
         {% if articles[article_handle].title != blank %}
           {%- include 'articles-product' article:  articles[article_handle]  -%}
         {% endif %}
     {% endfor %}
-    
+
 {% else %}
 
     {% for article in blog.articles limit: how_many_articles_to_show %}
