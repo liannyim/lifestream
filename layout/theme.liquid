@@ -49,5 +49,7 @@
     {%- if settings.show_multiple_currencies -%}
     {{ "/services/javascripts/currencies.js" | script_tag }}
     {%- endif -%}
+   
+    <script src="{{ 'application.js' | asset_url }}" defer="defer"></script>
   </body>
 </html>

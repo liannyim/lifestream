@@ -1,0 +1,43 @@
+{% assign prd_variant = product.selected_or_first_available_variant %}
+<div class="product-tile">
+    <div class="product-tile__image-wrapper">
+        <a class="product-card__image  js" href="{{ product.url | within: collection }}" style="max-width: 680px;" data-image-id="{{ image.id }}">
+            <div class="product-card__image-eclipse-{{ collection_id }}"></div>
+            {%- assign img_url = product.featured_image | img_url: "master"  -%}
+            <img class="lazyload"
+                 data-src="{{ img_url }}"
+                 src="{%- include 'srcBlank' -%}"
+                 alt="{{ image.alt | escape }}">
+          </a>
+    </div>
+    <div class="product-tile__info">
+        <div class="product-tile__title">
+            <span>{{product.title}}</span>
+            {% if product.metafields.bundled.volume != blank %}
+                <span class="product-tile__volume">
+                    {{product.metafields.bundled.volume}}
+                </span>
+                {% else %}
+                <span class="product-tile__volume">{{ prd_variant.option1 }}</span>
+            {% endif %}
+           
+        </div>
+        {% if product.metafields.bundled.instructions != blank %}
+            <div class="pb-2 rte product-single__instruction">
+                {{product.metafields.bundled.instructions}}
+            </div>
+        {% endif %}
+        <div class="product-tile__description">
+            {% if product.metafields.bundled.custom_desc != blank %}
+                <p>{{ product.metafields.bundled.custom_desc }}</p>
+            {% else %}
+                <p>{{ product.description }}</p>
+            {% endif %}
+        </div>
+        <div class="product-tile__link">
+            <a class="btn btn-underline" href="{{ product.url | within: collection }}" style="max-width: 680px;" data-image-id="{{ image.id }}">
+                learn more
+            </a>
+        </div>
+    </div>
+</div> 

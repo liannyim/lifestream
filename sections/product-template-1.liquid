@@ -1,10 +1,11 @@
 <!-- product-template-1.liquid -->
+{% include 'get-collection-color' %}
 <style>
   .modal-backdrop.show{
     display:none !important;
   }
   #productrelated {
-    margin-top: 70px
+    margin-top: 60px
   }
   .product-modal__image {
     display: block;
@@ -55,7 +56,7 @@
     display: none
   }
 
-  
+
 
   .social-sharing .col-title {
     font-size: 14px;
@@ -83,18 +84,66 @@
   }
 
   .selector-wrapper {
-    margin: 15px 0;
+    margin: 10px 0 0 0;
   }
   #shopify-section-{{ section.id }} .product-single__info-wrapper{
       padding:0rem 0rem 0rem 3rem;
   }
   .template-product .main-content{
-    padding-top:80px;
+    padding-top:0px;
   }
   .product-form-select .selector-wrapper{
     flex: 0 0 50%;
     max-width: 50%;
   }
+
+  {% if collection_primaryColor != blank %}
+
+  .g-breadcrumb a:hover{
+    color: {{ collection_primaryColor }}!important;
+  }
+
+  .product-tile__title span,
+  .product-single__meta-saving-{{ collection_id }} {
+    color: {{ collection_primaryColor }};
+  }
+  #bundled-products .product-tile__link a,
+  #blogs .card__read-more{
+    color: {{ collection_primaryColor }}!important;
+    border-bottom-color: {{ collection_primaryColor }}!important;
+  }
+
+  .btn-theme-{{ collection_id }},
+  .sticky-cart-{{ collection_id }} #js-sticky-btn,
+  .meta-btnColor-{{collection_id}} .btn-theme{
+    background: {{ collection_primaryColor }} !important;
+  }
+
+
+
+  .btn-theme-{{ collection_id }}:before,
+  .sticky-cart-{{ collection_id }} #js-sticky-btn:before,
+  .meta-btnColor-{{collection_id}} .btn-theme:before,
+  #story-block .wrapper-{{ collection_id }} a.btn-theme:before{
+    background: {{ collection_primaryColor }};
+  }
+
+  #bundled-products .product-tile__link a:hover,
+  #blogs .card__read-more:hover{
+    filter: brightness(0.6);
+  }
+
+
+
+
+  .btn-theme-{{ collection_id }}:hover:before,
+  .sticky-cart-{{ collection_id }} #js-sticky-btn:hover:before,
+  .meta-btnColor-{{collection_id}} .btn-theme:hover:before,
+  #story-block .wrapper-{{ collection_id }} a.btn-theme:hover:before{
+    filter: brightness(0.6);
+  }
+
+  {% endif %}
 
   @media (max-width:1100px) {
     #shopify-section-{{ section.id }} .product-single__info-wrapper{
@@ -104,7 +153,6 @@
       display: block;
     }
     .product-form__item--quantity{
-      width: 130px;
       margin-bottom: 10px;
     }
     .product-form__quantity-submit .product-form__item--submit{
@@ -119,9 +167,9 @@
       padding-top: 20px;
     }
   }
-  
+
 </style>
-<div class="container js-recently-view" itemscope itemtype="http://schema.org/Product" id="ProductSection-{{ section.id }}" data-section-id="{{ section.id }}" data-section-type="product" data-enable-history-state="true" data-ajax="true" data-stock="{{ section.settings.stock_enable }}" data-handle="{{product.handle}}">
+<div class="container-fluid js-recently-view" itemscope itemtype="http://schema.org/Product" id="ProductSection-{{ section.id }}" data-section-id="{{ section.id }}" data-section-type="product" data-enable-history-state="true" data-ajax="true" data-stock="{{ section.settings.stock_enable }}" data-handle="{{product.handle}}">
   {% assign product_image_size = '480x480' %}
   {% assign current_variant = product.selected_or_first_available_variant %}
   <meta itemprop="name" content="{{ product.title }}">
@@ -130,9 +178,9 @@
   <meta itemprop="brand" content="{{ product.vendor }}">
 
   <div class="row product-single">
-    <div class="col-md-6">
+    <div class="col-md-5">
       <div class="photos">
-        
+
         <div class="photos__item photos__item--main " >
           <div class="my-gallery" itemscope itemtype="http://schema.org/ImageGallery">
             {%- assign featured_image = current_variant.featured_image | default: product.featured_image -%}
@@ -208,52 +256,57 @@
         {% endif %}
       </div>
     </div>
-    <div class="col-12 col-md-6 order-1" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+    <div class="col-12 col-md-7 order-1" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
       <div class="product-single__info-wrapper">
         <meta itemprop="priceCurrency" content="{{ shop.currency }}">
         <link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
         <div class="product-single__meta small--text-center">
-          <h1 itemprop="name" class="product-single__title">{{ product.title }}<sup><span id="ProductSaleTag-{{ section.id }}" class="{% unless product.compare_at_price > product.price %}hide{% endunless %}">
-            <span class="product-tag gradient-theme">
-              {{ 'products.product.on_sale' | t }}
-            </span>
-          </span></sup>
-          </h1>
-          {% if product.metafields.info.shortdesc != blank %}
-          <div class=" pb-2 rte product-single__description" itemprop="description">
-            {{product.metafields.info.shortdesc}}
+          <div class="product-single__heading-section">
+            <div class="product-single__heading-section-main">
+              <h1 itemprop="name" class="product-single__title">{{ product.title }}<sup><span id="ProductSaleTag-{{ section.id }}" class="{% unless product.compare_at_price > product.price %}hide{% endunless %}">
+                <span class="product-tag gradient-theme">
+                  {{ 'products.product.on_sale' | t }}
+                </span>
+              </span></sup>
+              </h1>
+              {% if product.metafields.info.support_headline != blank %}
+              <div class=" pb-2 rte product-single__description">
+                {{product.metafields.info.support_headline}}
+              </div>
+              {% endif %}
+            </div>
+            <ul class="pb-3 product-single__meta-list list--inline{% if shop.taxes_included or shop.shipping_policy.body != blank %} product-single__price-container{% endif %}">
+              <li>
+                {% include 'product-info-price' %}
+
+              </li>
+              {% if product.compare_at_price_max > product.price %}
+              <li>
+                <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
+                <s id="ComparePrice-{{ section.id }}" class="product-single__price product-single__price--compare">
+                  {{ current_variant.compare_at_price | money }}
+                </s>
+              </li>
+              {% endif %}
+
+              {%- if section.settings.stock_enable -%}
+              <li>{%- include 'productStock' -%}</li>
+              {%- endif -%}
+            </ul>
+          </div>
+          {% if product.metafields.info.intro_paragraph != blank %}
+          <div class="pt-2 pb-2 rte product-single__intro">
+            {{product.metafields.info.intro_paragraph}}
           </div>
           {% endif %}
-          <div class="review">
-            <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
-          </div>
-          <ul class="pb-3 product-single__meta-list list--inline{% if shop.taxes_included or shop.shipping_policy.body != blank %} product-single__price-container{% endif %}">
-            <li>
-              {%- unless product.compare_at_price_max > product.price -%}
-              <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
-              {%- endunless -%}
-              <span id="ProductPrice-{{ section.id }}" class="product-single__price" itemprop="price" content="{{ current_variant.price | divided_by: 100.00 }}">
-                {{ current_variant.price | money }}
-              </span>
-            </li>
-            {% if product.compare_at_price_max > product.price %}
-            <li>
-              <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
-              <s id="ComparePrice-{{ section.id }}" class="product-single__price product-single__price--compare">
-                {{ current_variant.compare_at_price | money }}
-              </s>
-            </li>
-            {% endif %}
-            
-            {%- if section.settings.stock_enable -%}
-            <li>{%- include 'productStock' -%}</li>
-            {%- endif -%}
-          </ul>
-          
-         
-         
+          {% if section.settings.gtab_review_enable %}
+            <div class="review">
+              <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+            </div>
+          {% endif %}
+
         </div>
-        
+
         {% if product.metafields.info.affiliate_link != blank %}{% comment %}AFFILIATE PRODUCT{% endcomment %}
           <a href="{{product.metafields.info.affiliate_link}}" class="my-3 btn btn-theme btn--full product-form__cart-submit {% if section.settings.enable_payment_button %}product-form__cart-submit--outline{% endif %}">
             {{product.metafields.info.affiliate_button}}
@@ -274,7 +327,7 @@
             {% for variant in product.variants %}
             <option {% if variant == current_variant %} selected="selected" {% endif %} data-sku="{{ variant.sku }}" value="{{ variant.id }}" {% unless variant.available %} disabled="disabled" {% endunless %}>
               {% if variant.available %}
-              {{ variant.title }} - {{ variant.price | money_with_currency }}
+                {{ variant.title }} - {{ variant.price | money_with_currency }}
               {% else %}
               {{ variant.title }} - {{ 'products.product.sold_out' | t }}
               {% endif %}
@@ -295,7 +348,7 @@
               <label class="hide" for="Quantity">{{ 'products.product.quantity' | t }}</label>
               <input type="number" id="Quantity" name="quantity" value="1" min="1" class="product-form__input product-form__quantity">
             </div>
-            <div class="product-form__item product-form__item--submit {% unless section.settings.enable_payment_button %} btn-disablebuynow {% endunless %}">
+            <div class="product-form__item product-form__item--submit meta-btnColor-{{ collection_id }} {% unless section.settings.enable_payment_button %} btn-disablebuynow {% endunless %}">
               <button type="submit"
                       name="add"
                       id="AddToCart-{{ section.id }}"
@@ -311,7 +364,7 @@
               </button>
             </div>
             {% if section.settings.enable_payment_button %}
-              <div class="product-form__buynow">
+              <div class="product-form__buynow hide">
               {{ form | payment_button }}
               {% if current_variant.available == false %}<style>.shopify-payment-button{display:none}</style>{% endif %}
               </div>
@@ -322,6 +375,14 @@
             <span class="btn btn-waitlist btn-theme" data-toggle="modal" data-target="#jsSoldout" title="{{ 'products.product.soldout_messenger' | t }}">{{'products.product.waitlist' | t}}</span>
           </div>
           {%- endif -%}
+
+          {% if product.metafields.info.bullet_points != blank %}
+            <div class="product-single__meta-bullet-points">
+              {{product.metafields.info.bullet_points}}
+            </div>
+          {% endif %}
+
+          {% if settings.enable_compare or settings.enable_wishlsit or section.settings.social_sharing_products %}
           <div class="gr-btnjs py-4 mt-4 border-top">
             <div class="d-flex align-items-center">
               <div>
@@ -343,19 +404,20 @@
                 {%- include 'productSizeGuide' -%}
               </div>
             </div>
-           
+
             {% if section.settings.social_sharing_products %}
               <div class="pt-4">
                 {% include 'social-sharing', share_title: product.title, share_permalink: product.url, share_image: product %}
               </div>
             {% endif %}
-            
-          </div> 
+
+          </div>
+          {% endif %}
           {% endform %}
           {% include 'notifySoldoutProduct' %}
         {% endif %}
 
-
+        {% if section.settings.product_vendor_enable or section.settings.product_type_enable or section.settings.variant_sku_enable or settings.safe_checkout_detail != blank %}
         <div class="row text-left pt-2">
           <div class="product-single__information col text-uppercase">
             {% if section.settings.product_vendor_enable %}
@@ -377,13 +439,14 @@
           </div>
           {% endif %}
         </div>
+        {% endif %}
         {% include 'fake-viewer' %}
         {% include 'free-shipping' %}
         {% include 'shipping-time' %}
         {% if settings.enable_countdown_page %}
         {% include 'product-countdown' %}
         {% endif %}
-        
+
         {% if section.settings.positiontab == "right" %}
           {% if section.settings.enable_tabvertical %}
             {%- include 'product-information-vertical' -%}
@@ -394,8 +457,11 @@
       </div>
     </div>
   </div>
+
   {% if section.settings.positiontab == "bottom" %}
-    <div class="container px-0">
+
+
+    <div class="container-fluid px-0">
         <div class="row justify-content-md-center">
             <div class="col-lg-9 col-12">
             {% if section.settings.enable_tabvertical %}
@@ -417,9 +483,16 @@
           {%- include 'related-products' -%}
         {% elsif block.type == 'service' %}
         {%- include 'service-pro' -%}
+        {% elsif block.type == 'bundled' %}
+        {%- include 'bundled-products' -%}
+        {% elsif block.type == 'blog' %}
+        {%- include 'blog-product' -%}
+        {% elsif block.type == 'story-block' %}
+          {%- include 'story-block' story: block -%}
       {% endif %}
       {% endfor %}
     </div>
+
   {%- include 'cross-sell' -%}
   {%- include 'upsell' -%}
   {%- include 'next-prev-product' -%}
@@ -427,6 +500,8 @@
   {%- include 'sticky-cart' -%}
   </script>
 </div>
+
+
 
 {% schema %}
 {
@@ -509,6 +584,46 @@
 ]
 },
 {
+  "type": "header",
+  "content": "Collection Primary Color"
+},
+{
+    "type": "paragraph",
+    "content": "💡 [Enter the primary color code for each collection here.](\/admin\/bulk?resource_name=Collection&edit=metafields.colors.primary)"
+},
+{
+"type": "header",
+"content": "Pricing"
+},
+{
+"type": "paragraph",
+"content": "💡 [Enter content for each product here.](\/admin\/bulk?resource_name=Product&edit=metafields.info.worth)"
+},
+{
+"type": "paragraph",
+"content": "How much is this product worth?"
+},
+{
+"type": "paragraph",
+"content": "💡 [Enter content for each product here.](\/admin\/bulk?resource_name=Product&edit=metafields.info.save)"
+},
+{
+"type": "paragraph",
+"content": "How much are we saving?"
+},
+{
+  "type": "header",
+  "content": "Variant Pricing"
+},
+{
+  "type": "paragraph",
+  "content": "💡 [Enter content for each product variant here.](\/admin\/apps/arena-custom-fields/product-variants_editor)"
+},
+{
+  "type": "paragraph",
+  "content": "How much is this product worth and how much are we saving?"
+},
+{
 "type": "header",
 "content": "Size guide"
 },
@@ -532,11 +647,23 @@
 },
 {
 "type": "header",
-"content": "Short description"
+"content": "Support Headline"
 },
 {
 "type": "paragraph",
-"content": "💡 [Enter content for each product here.](\/admin\/bulk?resource_name=Product&edit=metafields.info.shortdesc)"
+"content": "💡 [Enter content for each product here.](\/admin\/bulk?resource_name=Product&edit=metafields.info.support_headline)"
+},
+{
+"type": "paragraph",
+"content": "💡 Can use plain text or HTML code"
+},
+{
+"type": "header",
+"content": "Intro Paragraph"
+},
+{
+"type": "paragraph",
+"content": "💡 [Enter content for each product here.](\/admin\/bulk?resource_name=Product&edit=metafields.info.intro_paragraph)"
 },
 {
 "type": "paragraph",
@@ -591,6 +718,18 @@
 "id": "fake_view_text_suffix",
 "label": "Subtext",
 "default": " peoples are currently looking at this product"
+},
+{
+"type": "header",
+"content": "Bullet Points"
+},
+{
+"type": "paragraph",
+"content": "💡 [Enter content for each product here.](\/admin\/bulk?resource_name=Product&edit=metafields.info.bullet_points)"
+},
+{
+"type": "paragraph",
+"content": "💡 Can use plain text or HTML code"
 },
 {
 "type": "header",
@@ -749,9 +888,23 @@
           },
           {
             "type": "text",
+            "id": "relate_products_subtitle",
+            "label": "Subtitle",
+            "default": "Not what you're after?"
+          },
+          {
+            "type": "text",
             "id": "relate_products_title",
             "label": "Title",
-            "default": "Related product"
+            "default": "You might like these..."
+          },
+          {
+            "type": "header",
+            "content": "Related Products"
+          },
+          {
+            "type": "paragraph",
+            "content": "💡 [Choose products to be displayed here.](\/admin\/apps/arena-custom-fields/products_editor)"
           },
           {
             "type": "range",
@@ -779,6 +932,109 @@
             "id": "dots",
             "label": "Dots",
             "default": true
+          }
+        ]
+      },
+      {
+        "type": "story-block",
+        "name": "Story Block",
+        "limit": 1,
+        "settings": [
+          {
+              "type": "image_picker",
+              "id": "image",
+              "label": "Image"
+          },
+          {
+              "type": "text",
+              "id": "top_title",
+              "label": "Top title"
+          },
+          {
+              "type": "text",
+              "id": "heading",
+              "label": "Heading"
+          },
+          {
+              "type": "text",
+              "id": "content",
+              "label": "Content"
+          },
+          {
+              "type": "textarea",
+              "id": "description",
+              "label": "Description"
+          },
+          {
+              "type": "text",
+              "id": "button_label",
+              "label": "Button label"
+          },
+          {
+              "type": "url",
+              "id": "button_link",
+              "label": "Button link"
+          }
+        ]
+      },
+      {
+        "type": "bundled",
+        "name": "What's in the Box",
+        "limit": 1,
+        "settings": [
+          {
+              "type": "text",
+              "id": "heading",
+              "label": "Heading",
+              "default": "What's in the Box"
+          },
+          {
+            "type": "image_picker",
+            "id": "rhs_bundled_bg",
+            "label": "Background Image (RHS)"
+          },
+          {
+            "type": "image_picker",
+            "id": "lhs_bundled_bg",
+            "label": "Background Image (LHS)"
+          },
+          {
+            "type": "header",
+            "content": "Bundled Products settings"
+          },
+          {
+            "type": "paragraph",
+            "content": "💡 [Add products and edit content here.](\/admin\/apps/arena-custom-fields/products_editor)"
+          }
+        ]
+      },
+      {
+        "type": "blog",
+        "name": "Blog",
+        "limit": 1,
+        "settings": [
+          {
+              "type": "text",
+              "id": "top_title",
+              "label": "Top title"
+          },
+          {
+              "type": "text",
+              "id": "heading",
+              "label": "Heading"
+          },
+          {
+              "id": "blog",
+              "type": "blog",
+              "label": "Blog"
+          },
+          {
+            "type": "header",
+            "content": "Custom Blog posts"
+          },
+          {
+            "type": "paragraph",
+            "content": "💡 [Choose blog to be displayed here.](\/admin\/apps/arena-custom-fields/products_editor)"
           }
         ]
       },

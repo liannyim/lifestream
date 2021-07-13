@@ -14,7 +14,7 @@
     .sticky-cart-wr{
       position: fixed;
       width: 100%;
-      padding:10px 0;
+      padding: 15px 0;
       bottom: 0;
       z-index: 999;
       background: var(--sticky-cart-mix);
@@ -36,17 +36,23 @@
       -ms-transform: translateY(100%) !important;
       transform: translateY(100%) !important;
     }
+    .sticky-cart-wr .product-form__quantity-submit {
+      padding-top: 0;
+      align-items: flex-start;
+    }
     #js-sticky-btn{
       background:var(--sticky-cart-bg);
       color:var(--sticky-cart-cl);
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
     }
     #js-sticky-prd{
       display: -webkit-box;
       display: -ms-flexbox;
       display: flex;
-      -webkit-box-pack: center;
-      -ms-flex-pack: center;
-      justify-content: center;
+      -webkit-box-pack: space-between;
+      -ms-flex-pack: space-between;
+      justify-content: space-between;
       -webkit-box-align: center;
       -ms-flex-align: center;
       align-items: center;
@@ -54,9 +60,11 @@
       flex-wrap: wrap;
       position:relative;
     }
-    #js-sticky-prd h3{
+    #js-sticky-prd h3 {
       font-size: 20px;
+      line-height: normal;
       max-width: 500px;
+      margin-bottom: 3px !important;
       overflow: hidden;
       -o-text-overflow: ellipsis;
       text-overflow: ellipsis;
@@ -70,6 +78,7 @@
       color:var(--sticky-cart-text);
     }
     #js-sticky-img{
+      display: none;
       height:70px;
     }
     .sticky-cart-select{
@@ -92,7 +101,7 @@
     }
 
     #js-sticky-close{
-      display: block;
+      display: none;
       width: 40px;
       height: 40px;
       border: none;
@@ -110,50 +119,83 @@
       margin-top: -20px;
     }
     #js-sticky-close .icon{margin:0 auto;}
-    .active #js-sticky-close{opacity:1}
+    .active #js-sticky-close{opacity:0}
     .active.disable #js-sticky-close{opacity:.6;top:-70px;margin-top: 0;}
     #js-sticky-close .icon-close+.icon{display:none}
     .disable #js-sticky-close .icon-close{display:none}
     .disable #js-sticky-close .icon-close+.icon{display:block}
   </style>
 <div id="js-anchor-sticky-cart"></div>
-  <div class="sticky-cart-wr shadow d-flex" >
-    <div id="js-sticky-prd" class="container align-self-center">
-      <img id="js-sticky-img" src="{{product.featured_image | img_url: '200x'}}" />
-      <h3 class="px-4 m-0">{{product.title}} <span id="js-sticky-title">{%- unless product.has_only_default_variant -%}- {{current_variant.title}}{%- endunless -%}</span></h3>
-      <div class="sticky-cart-selectors d-flex py-2 pr-4 text-center">
-        {%- unless product.has_only_default_variant -%}
-        {%- for option in product.options_with_values -%}
-        {% unless option.name == 'default' %}
-        <div class="sticky-cart-select px-3 mx-1">
-          <label>{{ option.name }}</label>
-          <select data-name="{{ option.name }}"
-                  onchange="triggerOption(this)"
-                  id="js-sticky-option-{{ forloop.index }}"
-                  data-radio="ProductSelect-option-{{ forloop.index0 }}"
-                  data-selectbox="SingleOptionSelector-{{ forloop.index0 }}">
-            {% for value in option.values %}
-            <option value="{{ value | escape }}" {% if option.selected_value == value %} selected="selected"{% endif %}>{{ value }}</option>
+  <div class="sticky-cart-wr shadow d-flex sticky-cart-{{ collection_id}}" >
+    <div id="js-sticky-prd" class="container-fluid align-self-center">
+      <div class="js-sticky-prd-headings-wrapper">
+        <img id="js-sticky-img" src="{{product.featured_image | img_url: '200x'}}" />
+        <h3 class="m-0">{{product.title}}</h3>
+        {% if product.metafields.info.support_headline != blank %}
+          <div class=" pb-2 rte product-single__description">
+            {{product.metafields.info.support_headline}}
+          </div>
+        {% endif %}
+      </div>
+      <div class="js-sticky-prd-info-wrapper d-flex">
+        <div class="js-sticky-info-inner"
+        ><div class="js-sticky-worth-wrapper">
+          {% if product.variants.size > 1 %}
+            {% if current_variant.metafields.pricing.worth != blank %}
+                {% for variant in product.variants %}
+                    <span class="product-single__meta-worth product-single__meta-worth-{{collection_id}} {% if variant != current_variant %}hide{% endif %}"
+                            data-variant="{{ variant.id }}">
+                        {{ variant.metafields.pricing.worth }}
+                    </span>
+                {% endfor %}
+            {% endif %}
+        {% else %}
+            {% if product.metafields.info.worth != blank %}
+                <span class="product-single__meta-worth product-single__meta-worth-{{collection_id}}">
+                    {{ product.metafields.info.worth }}
+                </span>
+            {% endif %}
+        {% endif %}
+      </div>
+        <div class="js-sticky-price-wrapper">
+          <div id="js-sticky-price" class="product-card__price">
+            {{ current_variant.price | money }}
+          </div>
+        {% if product.variants.size > 1 %}
+          {% if current_variant.metafields.pricing.save != blank %}
+            {% for variant in product.variants %}
+              <span class="product-single__meta-saving product-single__meta-saving-{{collection_id}} {% if variant != current_variant %}hide{% endif %}" data-variant="{{ variant.id }}" >
+                {{ variant.metafields.pricing.save }}
+              </span>
             {% endfor %}
-          </select>
+          {% endif %}
+        {% else %}
+          {% if product.metafields.info.save != blank %}
+            <span class="product-single__meta-saving product-single__meta-saving-{{collection_id}}">
+            {{product.metafields.info.save}}
+            </span>
+          {% endif %}
+        {% endif %}
+      </div>
+    </div>
+
+      <div class="js-product-form product-form__quantity-submit d-flex">
+        <div class="product-form__item js-product-form__item--quantity">
+          <label class="hide" for="Quantity">{{ 'products.product.quantity' | t }}</label>
+          <input type="number" id="Quantity" name="quantity" value="1" min="1" class="product-form__input product-form__quantity">
         </div>
-        {%- endunless -%}
-        {%- endfor -%}
-        {%- endunless -%}
+          <button id="js-sticky-btn" {% unless current_variant.available %}disabled="disabled"{% endunless %}
+                  class="btn btn-theme my-2 ml-auto"
+
+                  data-buttonid="AddToCart-{{ section.id }}">
+            {%- unless current_variant.available -%}
+            {{ 'products.product.sold_out' | t }}
+            {%- else -%}
+            {{ 'products.product.add_to_cart' | t }}
+            {%- endunless -%}
+          </button>
+        </div>
       </div>
-      <div id="js-sticky-price" class="product-card__price">
-        {{ current_variant.price | money }}
-      </div>
-      <button id="js-sticky-btn" {% unless current_variant.available %}disabled="disabled"{% endunless %}
-              class="btn btn-theme my-2 ml-auto" 
-              onclick="triggerCart(this)" 
-              data-buttonid="AddToCart-{{ section.id }}">
-        {%- unless current_variant.available -%}
-        {{ 'products.product.sold_out' | t }}
-        {%- else -%}
-        {{ 'products.product.add_to_cart' | t }}
-        {%- endunless -%}
-      </button>
       <button id="js-sticky-close">
         {%- include 'icon-close' -%}
         {%- include 'icon-cart' -%}
@@ -163,6 +205,7 @@
   <script>
     triggerCart = function (e){
       var elementButton = e.getAttribute('data-buttonid');
+      console.log(elementButton);
       document.getElementById(elementButton).click();
     }
 

@@ -1,0 +1,41 @@
+{% if product.variants.size > 1 %}
+    {% if current_variant.metafields.pricing.worth != blank %}
+        {% for variant in product.variants %}
+            <span class="product-single__meta-worth product-single__meta-worth-{{collection_id}}{% if variant != current_variant %} hide{% endif %}"
+                    data-variant="{{ variant.id }}">
+                {{ variant.metafields.pricing.worth }}
+            </span>
+        {% endfor %}
+    {% endif %}
+{% else %}
+    {% if product.metafields.info.worth != blank %}
+        <span class="product-single__meta-worth product-single__meta-worth-{{collection_id}}">
+            {{ product.metafields.info.worth }}
+        </span>
+    {% endif %}
+{% endif %}
+
+{%- unless product.compare_at_price_max > product.price -%}
+    <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
+{%- endunless -%}
+<span id="ProductPrice-{{ section.id }}" class="product-single__price" itemprop="price" content="{{ current_variant.price | divided_by: 100.00 }}">
+    {{ current_variant.price | money }}
+</span>
+
+{% if product.variants.size > 1 %}
+    {% if current_variant.metafields.pricing.save != blank %}
+        {% for variant in product.variants %}
+            <span
+                    class="product-single__meta-saving product-single__meta-saving-{{collection_id}}{% if variant != current_variant %} hide{% endif %}"
+                    data-variant="{{ variant.id }}">
+                    {{ variant.metafields.pricing.save }}
+            </span>
+        {% endfor %}
+    {% endif %}
+{% else %}
+    {% if product.metafields.info.save != blank %}
+        <span class="product-single__meta-saving product-single__meta-saving-{{collection_id}}">
+            {{product.metafields.info.save}}
+        </span>
+    {% endif %}
+{% endif %}

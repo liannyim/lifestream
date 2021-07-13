@@ -13,13 +13,13 @@
   <div class="hide">
     {%- for block in section.blocks -%}
     {%- assign product = all_products[block.settings.product] -%}
-    <div class="data-product" 
-         data-id="{{product.id}}" 
-         data-image="{{product.featured_image | img_url:'100x'}}" 
-         data-url="{{ product.url | within: collection }}" 
-         data-title="{{product.title}}" 
-         data-alt="{{product.featured_image.alt}}" 
-         data-local="{{block.settings.local}}" 
+    <div class="data-product"
+         data-id="{{product.id}}"
+         data-image="{{product.featured_image | img_url:'100x'}}"
+         data-url="{{ product.url | within: collection }}"
+         data-title="{{product.title}}"
+         data-alt="{{product.featured_image.alt}}"
+         data-local="{{block.settings.local}}"
          data-time="{{block.settings.time}}"></div>
     {%- endfor -%}
   </div>

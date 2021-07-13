@@ -47,7 +47,7 @@
   
         {%- if section.settings.button != blank and section.settings.link != blank -%}
         <div class="parallax-banner__btn">
-          <a href="{{ section.settings.link }}" class="btn btn-theme gradient-theme">
+          <a href="{{ section.settings.link }}" class="btn btn-theme gradient-theme btn-theme-{{ collection.id }}">
             {{ section.settings.button | escape }}
           </a>
         </div>

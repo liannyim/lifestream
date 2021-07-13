@@ -1,0 +1,28 @@
+<div class="card-list col-sm-12 col-md-4 col-lg-4">
+    <div class="card-list__column" >
+        <div class="card critical-clear border-0">
+            <a class="card__wrapper card--article" href="{{article.url}}">
+                <div class="card__info">
+                <div class="card__image-wrapper">
+                {%- if article.image -%}
+                {{ article | img_url: '150x150', scale: 3 | img_tag: '' }}
+                {%- endif -%}
+                </div>
+                <h3 class="card__name h3">{{ article.title }}</h3>
+                    <a href="{{article.url}}">
+                        <p class="card__excerpt">
+                            {%- if article.excerpt.size > 0 -%}
+                              {{ article.excerpt | truncatewords: 20 }}
+                            {%- else -%}
+                              {{ article.content | strip_html | truncatewords: 30 }}
+                            {%- endif -%}
+                          </p>
+                        <p class="card__read-more btn btn-underline">
+                            {{ 'blogs.article.read_more' | t }}
+                        </p>
+                    </a>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>

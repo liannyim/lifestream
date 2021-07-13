@@ -14,25 +14,25 @@
   
       <div class="product-card__overlay d-flex justify-content-center flex-row">
         {%- if settings.enable_wishlsit -%}
-      <span data-toggle="tooltip" data-placement="top" data-tooltipalltimes="true" class="btn btn-theme gradient-theme-vertical product-card__overlay-btn js-btn-wishlist" title="{{ 'products.product.wishlist_text' | t }}" data-handle="{{product.handle}}">
+      <span data-toggle="tooltip" data-placement="top" data-tooltipalltimes="true" class="btn btn-theme btn-theme-{{ collection.id }} gradient-theme-vertical product-card__overlay-btn js-btn-wishlist" title="{{ 'products.product.wishlist_text' | t }}" data-handle="{{product.handle}}">
         {%- include 'icon-heart' -%}
       </span>
       {%- endif -%}
       
 
-      <span data-tooltip="true" data-placement="top" class="btn btn-theme gradient-theme-vertical product-card__overlay-btn js-btn-quickview" title="{{ 'products.product.quickview_text' | t }}" data-toggle="modal" data-target="#jsQuickview" data-handle="{{product.handle}}">
+      <span data-tooltip="true" data-placement="top" class="btn btn-theme btn-theme-{{ collection.id }} gradient-theme-vertical product-card__overlay-btn js-btn-quickview" title="{{ 'products.product.quickview_text' | t }}" data-toggle="modal" data-target="#jsQuickview" data-handle="{{product.handle}}">
         {%- include 'icon-quickview' -%}
         <span>{{ 'products.product.quickview_text' | t }}</span>
       </span>
 
       {%- if settings.enable_compare -%}
-      <span data-tooltip="true" data-placement="top" class="btn btn-theme gradient-theme-vertical product-card__overlay-btn js-btn-compare" title="{{ 'products.product.compare_text' | t }}" data-handle="{{product.handle}}">
+      <span data-tooltip="true" data-placement="top" class="btn btn-theme btn-theme-{{ collection.id }} gradient-theme-vertical product-card__overlay-btn js-btn-compare" title="{{ 'products.product.compare_text' | t }}" data-handle="{{product.handle}}">
         {%- include 'icon-exchange' -%}
         {%- include 'icon-close' -%}
         <span>{{ 'products.product.compare_text' | t }}</span>
       </span>
       {%- endif -%}
-      <span data-tooltip="true" data-placement="top" class="btn btn-theme gradient-theme-vertical product-card__overlay-btn js-grid-cart" title="{{ 'products.product.add_to_cart' | t }}" data-id="{{product.selected_or_first_available_variant.id}}">
+      <span data-tooltip="true" data-placement="top" class="btn btn-theme btn-theme-{{ collection.id }} gradient-theme-vertical product-card__overlay-btn js-grid-cart" title="{{ 'products.product.add_to_cart' | t }}" data-id="{{product.selected_or_first_available_variant.id}}">
         {%- include 'icon-cart' -%}
         <div class="product-card__loading spinner-{{settings.loading}}" role="status"></div>
         <span>{{ 'products.product.add_to_cart' | t }}</span>
