@@ -11,7 +11,7 @@
             {{ block.settings.top_title }}</p>
         {% endif %}
         {% if block.settings.heading != blank %}
-        <h4 class="mb-5 text-center section-title-1 aos-init aos-animate" data-aos="fade-up" data-aos-duration="500">
+        <h4 class="text-center section-title-1 aos-init aos-animate" data-aos="fade-up" data-aos-duration="500">
             {{ block.settings.heading }}</h4>
         {% endif %}
     </div>
@@ -30,7 +30,7 @@
     {% for article in blog.articles limit: how_many_articles_to_show %}
         {% include 'articles-product' %}
     {% endfor %}
-   
+
 {% endif %}
 </div>
 </div>

@@ -64,8 +64,8 @@ $(document).ready(function () {
             mobileFirst: true,
             responsive: [
                   {
-                          breakpoint: 768,
-                          settings: 'unslick'
+                    breakpoint: 989,
+                    settings: 'unslick'
                   }
             ]
           });
