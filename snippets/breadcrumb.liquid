@@ -1,5 +1,5 @@
 {%- if settings.enable_breadcrumb -%}
-{% unless template == 'index' or template == 'cart' or template == 'list-collections' %}
+{% unless template == 'index' or template == 'cart' or template == 'list-collections' or template == 'page.about' or template == 'page.team_member' %}
 <style>
   .g-breadcrumb{
     border-radius: 0;
@@ -54,7 +54,7 @@
   {% if collection.image.src == blank %}
     {% assign bgimage = settings.img_breadcrumb %}
   {% endif %}
-{% elsif template contains 'product' and collection.handle %}	
+{% elsif template contains 'product' and collection.handle %}
   {% assign bgimage = collection.image.src %}
 {% endif %}
 <nav class="breadcrumbs-{{settings.style_breadcrumb}} breadcrumb g-breadcrumb lazyload text-{{settings.align_bread}}" role="navigation" aria-label="breadcrumbs" {% unless settings.style_breadcrumb == "style_1" %}data-bgset="{%- include 'bgset', image: bgimage -%}"  data-sizes="auto"
@@ -65,9 +65,9 @@ data-parent-fit="cover" {% endunless%}>
     <h3 class="mb-2 h2 br-title">{{ collection.title }}</h3>
     {% elsif template contains 'page' %}
     <h3 class="mb-2 h2 br-title">{{ page.title }}</h3>
-    {% elsif template contains 'product' and collection.handle %}	
+    {% elsif template contains 'product' and collection.handle %}
       <h3 class="mb-2 h2 br-title">{{ page.title }}</h3>
-    {% elsif template contains 'blog' %}	
+    {% elsif template contains 'blog' %}
       <h3 class="mb-2 h2 br-title">{{ blog.title }} {%- include 'icon-rss' -%}</h3>
     {% endif %}
   {% endif %}
