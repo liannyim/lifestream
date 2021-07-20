@@ -1,0 +1,64 @@
+{% if section.blocks.size > 0 %}
+  {% for block in section.blocks %}
+		{% if block.settings.page == page.handle %}
+      <div class="page-banner page-banner-{{ block.id }}">
+
+        {% if block.settings.title != blank %}
+					<h1>{{ block.settings.title }}</h1>
+				{% else %}
+					<h1>{{ page.title }}</h1>
+				{% endif %}
+
+        {% if block.settings.link_list != blank %}
+          <ul>
+            {%- for link in linklists[block.settings.link_list].links -%}
+              <li {% if page.url == link.url %}class="active"{% endif %}><a href="{{ link.url }}"><h5>{{ link.title }}</h5></a></li>
+            {%- endfor -%}
+          </ul>
+        {% endif %}
+      </div>
+
+      <style>
+        .page-banner-{{ block.id }} {
+          background-color: {{ block.settings.bg_color }};
+        }
+      </style>
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+{% schema %}
+	{
+		"name": "Page Banners",
+		"blocks": [
+			{
+				"type": "page",
+				"name": "Page Banner",
+				"settings": [
+					{
+						"type": "page",
+						"id": "page",
+						"label": "Which page should this appear?"
+					},
+					{
+						"type": "text",
+						"id": "title",
+						"label": "Custom Title",
+            "info": "This is optional. Enter something here if you want to override the default page title."
+					},
+					{
+						"type": "link_list",
+						"id": "link_list",
+						"label": "Navigation List"
+					},
+          {
+            "type": "color",
+            "id": "bg_color",
+            "label": "Background Color",
+            "default": "#EFF1EC"
+          }
+				]
+			}
+		]
+	}
+{% endschema %}
