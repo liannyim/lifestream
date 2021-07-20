@@ -41,6 +41,16 @@
 	</style>
 
 	<section class="panels">
+		{% if section.settings.bottom_background != blank %}
+			<div class="bottom_bundled_bg"></div>
+		{% endif %}
+		{% if section.settings.mid_background != blank %}
+			<div class="mid_bundled_bg"></div>
+		{% endif %}
+		{% if section.settings.top_background != blank %}
+			<div class="top_bundled_bg"></div>
+		{% endif %}
+		
 		<div class="container">
 			{% for block in section.blocks %}
 				<div class="panel panel-{{ block.id }} panel-{{ block.settings.panel_direction }}">
