@@ -1,4 +1,45 @@
 {% if section.blocks.size > 0 %}
+	<style>
+		.top_bundled_bg,
+		.bottom_bundled_bg,
+		.mid_bundled_bg {
+				position: absolute;
+				background-size: cover;
+				width: 400px;
+				max-height: 600px;
+				background-repeat: no-repeat;
+				height: 100%;
+				z-index: 0;
+		}
+
+		.top_bundled_bg {
+				top: 0;
+				right: 0;
+				background-image: url({{ section.settings.top_background | img_url: 'master' }});
+		}
+
+		.mid_bundled_bg {
+				top: 50%;
+				transform: translate(0, -50%);
+				left: 0;
+				background-image: url({{ section.settings.mid_background | img_url: 'master' }});
+		}
+
+		.bottom_bundled_bg {
+				bottom: 0;
+				right: 0;
+				background-image: url({{ section.settings.bottom_background | img_url: 'master' }});
+		}
+
+		@media only screen and (max-width: 990px) {
+			.top_bundled_bg,
+			.bottom_bundled_bg,
+			.mid_bundled_bg {
+				display: none;
+			}
+		}
+	</style>
+
 	<section class="panels">
 		<div class="container">
 			{% for block in section.blocks %}
@@ -123,6 +164,24 @@
 			}
 		],
 		"settings": [
+			{
+				"type": "image_picker",
+				"id": "top_background",
+				"label": "Background Image (Top)",
+				"info": "Recommended Size: 800x1200px"
+			},
+			{
+				"type": "image_picker",
+				"id": "mid_background",
+				"label": "Background Image (Middle)",
+				"info": "Recommended Size: 800x1200px"
+			},
+			{
+				"type": "image_picker",
+				"id": "bottom_background",
+				"label": "Background Image (Bottom)",
+				"info": "Recommended Size: 800x1200px"
+			}
 		]
 	}
 {% endschema %}
