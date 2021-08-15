@@ -25,7 +25,7 @@
             {% if block.settings.description != blank %}
             <p>{{block.settings.description}}</p>
             {% endif %}
-            {% if block.settings.link != blank %}
+            {% if block.settings.button-text != blank %}
             <a target="_blank" href="{{block.settings.link}}" title="{{section.settings.button-text}}" class="s-timeline__read-more mt-4">{{section.settings.button-text}}</a>
             {% endif %}
             {% if block.settings.time != blank %}
@@ -45,7 +45,7 @@
 
 {% style %}
   {% comment %}========================   CSS Liquid ========================{% endcomment %}
-  
+
   {% comment %} Gerenal setting {% endcomment %}
   {% assign title_font = section.settings.title_font %}
   {% assign subtitle_font = section.settings.subtitle_font %}

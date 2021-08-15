@@ -14,13 +14,15 @@
         <div class="product-tile__title">
             <span>{{product.title}}</span>
             {% if product.metafields.bundled.volume != blank %}
-                <span class="product-tile__volume">
-                    {{product.metafields.bundled.volume}}
-                </span>
-                {% else %}
+              <span class="product-tile__volume">
+                {{product.metafields.bundled.volume}}
+              </span>
+            {% else %}
+              {% unless prd_variant.option1 == "Default Title" %}
                 <span class="product-tile__volume">{{ prd_variant.option1 }}</span>
+              {% endunless %}
             {% endif %}
-           
+
         </div>
         {% if product.metafields.bundled.instructions != blank %}
             <div class="pb-2 rte product-single__instruction">
@@ -28,10 +30,10 @@
             </div>
         {% endif %}
         <div class="product-tile__description">
-            {% if product.metafields.bundled.custom_desc != blank %}
-                <p>{{ product.metafields.bundled.custom_desc }}</p>
+            {% if product.metafields.info.intro_paragraph != blank %}
+                <p>{{ product.metafields.info.intro_paragraph }}</p>
             {% else %}
-                <p>{{ product.description }}</p>
+                <p>{{ product.description | truncate: 120 }}</p>
             {% endif %}
         </div>
         <div class="product-tile__link">
@@ -40,4 +42,4 @@
             </a>
         </div>
     </div>
-</div> 
+</div>

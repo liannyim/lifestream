@@ -8792,6 +8792,9 @@ a.text-primary{
     color:var(--g-main) !important;
     border-bottom-color:var(--g-main) !important;
   }
+  .form-success {
+    margin-bottom: 20px;
+  }
 }
 .btn-underline{
   text-transform:uppercase;
@@ -10147,13 +10150,21 @@ a.text-primary{
     margin: 0 auto;
     display: flex;
     justify-content: center;
+    background: rgba(255,255,255,.8);
 
     @include media-query ($medium-up) {
       align-items: center;
+      padding-right: 40px;
     }
 
     &:nth-child(even){
       flex-direction: row-reverse;
+
+      @include media-query ($medium-up) {
+        padding-left: 40px;
+        padding-right: 0;
+      }
+
      .product-tile__image-wrapper{
         margin-right: 0px;
         margin-left: 40px;
@@ -10272,7 +10283,9 @@ a.text-primary{
   padding-top: 5px;
 }
 
-.product-tile__description{
+.product-tile__description {
+  margin: 20px 0;
+
   p {
     font-size: 14px;
     font-weight: 400;
@@ -10283,4 +10296,7 @@ a.text-primary{
       line-height: 22px;
     }
   }
+}
+.shopify-challenge__button {
+  @extend .btn-theme;
 }

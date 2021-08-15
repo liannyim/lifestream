@@ -1243,7 +1243,7 @@ window.QtySelector = (function() {
     } else {
       this.cache.$discountTotal.empty();
     }
-    
+
     theme.miniCart.updateElements();
     theme.updateCurrencies();
     // Set focus on cart table
@@ -1266,7 +1266,7 @@ window.AjaxCart = (function() {
 
     this.$form = $form;
     this.eventListeners();
-    
+
     this.showNotice = false;
     if (this.$form.length) {
       this.showNotice  = this.$form.hasClass('js-form--notice')? true : false;
@@ -1297,7 +1297,7 @@ window.AjaxCart = (function() {
 
     $.ajax(params);
   };
-  
+
   cart.prototype.success = function(item) {
     theme.miniCart.updateElements();
     theme.miniCart.generateCart();
@@ -1315,7 +1315,7 @@ window.AjaxCart = (function() {
   // Error handling reference from Shopify.onError in api.jquery.js
   cart.prototype.error = function(XMLHttpRequest) {
     var data = JSON.parse(XMLHttpRequest.responseText);
-    
+
     if (data.message) {
       theme.alert.new('',data.description,3000,'warning');
     }
@@ -1717,7 +1717,7 @@ theme.Product = (function() {
           $(this.selectors.comparePrice).addClass('hide');
           $(this.selectors.saleTag).addClass('hide');
         }
-        
+
         theme.updateCurrencies();
       } else {
         $(this.selectors.comparePrice).addClass('hide');
@@ -1837,7 +1837,7 @@ theme.Product = (function() {
         );
         if (currentActiveSlideIndex !== newActiveSlideIndex) {
           $thumbnails.slick('slickGoTo', newActiveSlideIndex, false);
-         
+
         }
       }
     },
@@ -1918,7 +1918,7 @@ theme.Product = (function() {
           'init' + this.settings.namespace,
           this._productSwipeInit.bind(this)
         );
-        
+
         if (this.settings.sectionId === 'product-template-3' || this.settings.sectionId === 'product-template-4'){
           $productThumbsWrapper.slick({
             accessibility: false,
@@ -1992,8 +1992,8 @@ theme.Product = (function() {
               topMenuHeight = $('.site-header').outerHeight()+20,
               // All list items
               menuItems = topMenu.find(".product-single__thumbnail");
-             
-             
+
+
           if ($(window).width() > 767) {
               menuItems.click(function (e){
               var findid =$(this).attr('href');
@@ -2008,7 +2008,7 @@ theme.Product = (function() {
                 var item = $($(this).attr('href'));
                 if (item.length) { return item; }
               });
-              
+
             $(window).scroll(function(){
                 // Get container scroll position
                 var fromTop = $(this).scrollTop()+topMenuHeight;
@@ -2020,14 +2020,14 @@ theme.Product = (function() {
                 // Get the id of the current element
                 cur = cur[cur.length-1];
                 var id = cur && cur.length ? cur[0].id : "";
-                
+
                 if (lastId !== id) {
                     lastId = id;
                     // Set/remove active class
                     menuItems
                       .parent().removeClass("is-active")
                       .end().filter("[href='#"+id+"']").parent().addClass("is-active");
-                }                   
+                }
             });
           }
           else{
@@ -2040,7 +2040,7 @@ theme.Product = (function() {
               return false;
             });
           }
-          
+
           $productThumbsWrapper.slick({
             accessibility: false,
             arrows: true,
@@ -2112,7 +2112,7 @@ theme.Product = (function() {
           )
             .find('.product-single__thumbnail')
             .trigger('click');
-          
+
         }
       );
     },
@@ -2546,7 +2546,7 @@ theme.Instagrams = (function() {
       resolution 		: this.$container.data('resolution'),
       target 			: this.$container.attr('id'),
       rows 			: this.$container.data('rows'),
-      
+
       slidesToShow 		: this.$container.data('slidestoshow') || 1,
       infinite 			: this.$container.data('infinite') || false,
       arrows 			: this.$container.data('arrows') || false,
@@ -2557,7 +2557,7 @@ theme.Instagrams = (function() {
     this.settings.slidesToShow992  		= (this.settings.slidesToShow - 2) > 1? (this.settings.slidesToShow - 2) : 1;
     this.settings.slidesToShow768  		= (this.settings.slidesToShow - 3) > 1? (this.settings.slidesToShow - 3) : 1;
     this.settings.slidesToShow480  		= 2;
-    
+
     var _self = this;
     var $instagramSelector = $('#'+this.settings.target);
     if (this.settings.style === 'grid'){
@@ -2737,7 +2737,7 @@ theme.slickCarousel = (function (){
         }
       });
     },
-    
+
     _goToSlide: function(slideIndex) {
       this.$container.slick('slickGoTo', slideIndex);
     },
@@ -2755,7 +2755,7 @@ theme.slickCarousel = (function (){
 
       // Go to selected slide, pause autoplay
       this._goToSlide(slideIndex);
-      
+
     }
   });
 
@@ -3503,14 +3503,14 @@ theme.quickview = (function() {
       var vendor = product.vendor;
       var price = 0;
       var compare_price = 0;
-      var desc = product.description.slice(0, 90);
+      var desc = product.description.slice(0, 120);
       var images = product.images;
       var variants = product.variants;
       var options = product.options;
       var url = '/products/' + product_handle;
       $('.qv-product-title').text(title);
       $('.qv-product-type').text(type);
-      $('.qv-product-description').html(desc);
+      $('.qv-product-description').html(desc + "...");
       $('.qv-view-product').attr('href', url);
       $('.qv-view-type').text(type);
       $('.qv-view-vendor').text(vendor)
@@ -3522,7 +3522,7 @@ theme.quickview = (function() {
         else{
           $('.qv-sku').addClass("hide").removeClass("show");
         }
-        
+
       });
       var imageCount = $(images).length;
       $(images).each(function(i, image) {
@@ -3691,17 +3691,17 @@ theme.addCartButton = (function(){
   })
 })()
 
-// Multi currencies 
+// Multi currencies
 if (theme.enableCurrencies){
   // Can be 'money_format' or 'money_with_currency_format'
   Currency.format = 'money_format';
   var shopCurrency = Shopify.currency.active;
   var cookieCurrency = Currency.cookie.read();
-  // Fix for customer account pages 
+  // Fix for customer account pages
   jQuery('span.money span.money').each(function() {
     jQuery(this).parent('span.money').removeClass('money');
   });
-  // Add precalculated shop currency to data attribute 
+  // Add precalculated shop currency to data attribute
   jQuery('span.money').each(function() {
     jQuery(this).attr('data-currency-' + Shopify.currency.active, jQuery(this).html());
   });
@@ -3753,12 +3753,12 @@ theme.miniCart = (function(){
 
   function updateElements(){
     Shopify.getCart(function(cart){
-      
+
       if (cart.item_count === 0) {
         $(cartContent).html(emptyCartHTML);
         $btnCheckout.addClass('disabled');
         styleCart === 'true' ? $(miniCart).removeClass('active') : null;
-        
+
       }else{
         $btnCheckout.removeClass('disabled');
         styleCart === 'true' ? $(miniCart).addClass('active') : null;
@@ -3777,7 +3777,7 @@ theme.miniCart = (function(){
           //styleCart === 'true' ? cart.items.length ? $(miniCart).addClass('active'): $(miniCart).removeClass('active') :null;
 
       // add list items
-      for (var i = 0; i < forLoop; i++) { 
+      for (var i = 0; i < forLoop; i++) {
         var product = cart.items[i],
             productPrice = theme.Currency.formatMoney(product.price, theme.moneyFormat);
         htmlCart += '<div class="mini-cart-item">';
@@ -3804,10 +3804,10 @@ theme.miniCart = (function(){
   $(document).on('click','.js-remove-mini-cart',function(){
     var itemId = $(this).data('id');
     var isOuterMiniCart = $(this).closest(miniCart).length === 0? true : false;  // check element from mini cart or not
-    
+
     // hide items
     $(this).parent().fadeOut();
-    
+
     //remove from cart
     Shopify.changeItem(itemId,0,updateElements);
     Shopify.getCart(function(cart){
@@ -3900,7 +3900,7 @@ theme.infiniteScroll = (function (){
       });
     }
   }
-  
+
   // Infinite scroll in other page (blog, list-collection)
   function initOtherPages(){
     var otherPages = new Ajaxinate({
@@ -3933,7 +3933,7 @@ theme.headersidebar = (function(){
     // hide overlay
     $('.overlaysidebar').removeClass('active');
   });
-  
+
   $('#sidebarCollapse').on('click', function () {
     // open sidebar
     $('#sidebar').addClass('active');
@@ -3967,17 +3967,17 @@ theme.wishlist = (function (){
       wishlistObject.push(productHandle);
       allSimilarProduct.fadeOut('slow').fadeIn('fast').html(theme.strings.wishlistIconAdded + theme.strings.wishlistTextAdded);
       //change tooltip
-      allSimilarProduct.attr('data-original-title',theme.strings.wishlistTextAdded); 
+      allSimilarProduct.attr('data-original-title',theme.strings.wishlistTextAdded);
       $('.tooltip-inner').text(theme.strings.wishlistTextAdded);
     }
-    localStorage.setItem('localWishlist', JSON.stringify(wishlistObject)); 
+    localStorage.setItem('localWishlist', JSON.stringify(wishlistObject));
     $wishlistCount.text(wishlistObject.length);
   };
   function loadWishlist(){
     $wishlistContainer.html('');
     //page wishlist
     if (wishlistObject.length > 0){
-      for (var i = 0; i < wishlistObject.length; i++) { 
+      for (var i = 0; i < wishlistObject.length; i++) {
         var productHandle = wishlistObject[i];
         Shopify.getProduct(productHandle,function(product){
           var htmlProduct = '';
@@ -3996,7 +3996,7 @@ theme.wishlist = (function (){
           htmlProduct += '</div>';
           htmlProduct += '</div>';
           htmlProduct += '</div>';
-          $wishlistContainer.append(htmlProduct); 
+          $wishlistContainer.append(htmlProduct);
           theme.updateCurrencies();
         });
       }
@@ -4015,7 +4015,7 @@ theme.wishlist = (function (){
       $(this).html(iconWishlist+textWishlist).attr('title',textWishlist);
     });
   }
-  
+
   $(document).on('click',wishlistButtonClass,function (event) {
     event.preventDefault();
     updateWishlist(this);
@@ -4023,7 +4023,7 @@ theme.wishlist = (function (){
   $(document).on('click',wishlistRemoveButtonClass,function(){
     var productHandle = $(this).data('handle'),
     allSimilarProduct = $(wishlistButtonClass+'[data-handle="'+productHandle+'"]');
-    
+
     //update button
     allSimilarProduct.html(theme.strings.wishlistIcon + theme.strings.wishlistText);
      //update tooltip
@@ -4031,7 +4031,7 @@ theme.wishlist = (function (){
     $('.tooltip-inner').text(theme.strings.wishlistText);
     //update Object
     wishlistObject.splice(wishlistObject.indexOf(productHandle), 1);
-    localStorage.setItem('localWishlist', JSON.stringify(wishlistObject)); 
+    localStorage.setItem('localWishlist', JSON.stringify(wishlistObject));
     // Remove element
     $(this).closest('.js-wishlist-item').fadeOut(); // or .remove()
     //count
@@ -4074,7 +4074,7 @@ theme.compare = (function (){
         alertText = theme.strings.compareNotifyAdded;
       }
     }
-    localStorage.setItem('localCompare', JSON.stringify(compareObject)); 
+    localStorage.setItem('localCompare', JSON.stringify(compareObject));
     theme.alert.new(theme.strings.compareText,alertText,2000,alertClass);
     $compareCount.text(compareObject.length);
   };
@@ -4084,7 +4084,7 @@ theme.compare = (function (){
     //popup compare
     if (compareObject.length > 0){
       compareGrid = compareObject.length === 1? 'col-md-6 col-sm-6' : 'col';
-      for (var i = 0; i < compareObject.length; i++) { 
+      for (var i = 0; i < compareObject.length; i++) {
         var productHandle = compareObject[i];
         Shopify.getProduct(productHandle,function(product){
           var htmlProduct = '',
@@ -4113,7 +4113,7 @@ theme.compare = (function (){
     }else{
       $compareContainer.html('<div class="alert alert-warning d-inline-block">'+ theme.strings.compareNoResult + '</div>');
     }
-    
+
     //button text
     $(compareButtonClass).each(function(){
       var productHandle = $(this).data('handle');
@@ -4132,7 +4132,7 @@ theme.compare = (function (){
   $(document).on('click',compareRemoveButtonClass,function(){
     var productHandle = $(this).data('handle');
     compareObject.splice(compareObject.indexOf(productHandle), 1);
-    localStorage.setItem('localCompare', JSON.stringify(compareObject)); 
+    localStorage.setItem('localCompare', JSON.stringify(compareObject));
     loadCompare();
   });
 
@@ -4162,7 +4162,7 @@ theme.popupNewletter = (function(){
         }, minutesdelay * 1000);
       });
       $popupNewsletter.on('hidden.bs.modal', setCookies);
-      $newsletterForm.submit(setCookies);     
+      $newsletterForm.submit(setCookies);
     }
   }
 })()
@@ -4239,9 +4239,9 @@ theme.priceRange =  (function (){
         enablePriceRange = $('#js-slider-range').length === 1? true : false;
 
     if (enablePriceRange){
-      $(productCard).each(function(){      
+      $(productCard).each(function(){
         if(eval($(this).data('price'))>max) max = eval($(this).data('price'));
-        if(min==0) min = eval($(this).data('price')); else if(eval($(this).data('price'))<min) min =  eval($(this).data('price'));      
+        if(min==0) min = eval($(this).data('price')); else if(eval($(this).data('price'))<min) min =  eval($(this).data('price'));
       });
 
       if (min === max){
@@ -4276,7 +4276,7 @@ theme.priceRange =  (function (){
       var price1 = (Shopify.formatMoney(min, theme.moneyFormat));
       var price2 = (Shopify.formatMoney(max, theme.moneyFormat));
       $(rangeMin).html(price1);
-      $(rangeMax).html(price2);	  
+      $(rangeMax).html(price2);
       theme.updateCurrencies();
 
     }
@@ -4324,7 +4324,7 @@ theme.collectionView =  (function (){
 theme.swatchCard = (function(){
   $(document).on('click','.js-swatch-card-item',function(){//click or mouseover
     $(".js-swatch-card-item").removeClass("active");
-    $(this).addClass("active");   
+    $(this).addClass("active");
     var newImage = $(this).data('image');
     var id = $(this).data('id');
     var gridItem = $(this).closest('.js-product-card');
@@ -4412,7 +4412,7 @@ theme.loading = (function(){
   if (hasLoading){
     $(window).load(function () {
       $loading.fadeOut();
-    });  
+    });
   }
 })()
 
@@ -4438,8 +4438,8 @@ theme.isotope = (function(){
         var filterValue = $(this).data('filter') === '*'? $(this).data('filter') : '.' + $(this).data('filter');
         $(filter).removeClass('active');
         $(this).addClass('active');
-        $grid.isotope({ 
-          filter: filterValue 
+        $grid.isotope({
+          filter: filterValue
         });
       });
       $(window).scroll(function() {
@@ -4522,7 +4522,7 @@ theme.crosssell = (function(){
       $blockCrosssell = $('.block-cross-sell'),
       variantSelectClass = '.js-cross-select',
       crossImageClass = '.cross-item-image',
-      crossPriceClass = '.cross-item-money';  
+      crossPriceClass = '.cross-item-money';
   function generateCrosssell(){
     for (var i = 0; i < arrayHandle.length; i++) {
       var productHandle = arrayHandle[i];
@@ -4558,7 +4558,7 @@ theme.crosssell = (function(){
       });
     }
   }
-  
+
   function showPopupCrosssell(lineItem){
     //generate lineitem;
     var htmlLineItem = '';
@@ -4724,7 +4724,7 @@ theme.productSuggest = (function(){
     $closeButtonClass.on('click',function(){
       $productSuggestClass.remove();
       $.cookie(productSuggestCookie, 'closed', {expires:1, path:'/'});
-    });  
+    });
     function toggleSomething() {
       if($productSuggestClass.hasClass('active')){
         $productSuggestClass.removeClass('active')
@@ -4767,7 +4767,7 @@ theme.stickyHeader = (function(){
 theme.PhotoSwipe = (function(){
   var initPhotoSwipeFromDOM = function(gallerySelector) {
 
-    // parse slide data (url, title, size ...) from DOM elements 
+    // parse slide data (url, title, size ...) from DOM elements
     // (children of gallerySelector)
     var parseThumbnailElements = function(el) {
         var thumbElements = el.childNodes,
@@ -4782,7 +4782,7 @@ theme.PhotoSwipe = (function(){
 
             figureEl = thumbElements[i]; // <figure> element
 
-            // include only element nodes 
+            // include only element nodes
             if(figureEl.nodeType !== 1) {
                 continue;
             }
@@ -4802,13 +4802,13 @@ theme.PhotoSwipe = (function(){
 
             if(figureEl.children.length > 1) {
                 // <figcaption> content
-                item.title = figureEl.children[1].innerHTML; 
+                item.title = figureEl.children[1].innerHTML;
             }
 
             if(linkEl.children.length > 0) {
                 // <img> thumbnail element, retrieving thumbnail url
                 item.msrc = linkEl.children[0].getAttribute('src');
-            } 
+            }
 
             item.el = figureEl; // save link to element for getThumbBoundsFn
             items.push(item);
@@ -4847,8 +4847,8 @@ theme.PhotoSwipe = (function(){
             index;
 
         for (var i = 0; i < numChildNodes; i++) {
-            if(childNodes[i].nodeType !== 1) { 
-                continue; 
+            if(childNodes[i].nodeType !== 1) {
+                continue;
             }
 
             if(childNodes[i] === clickedListItem) {
@@ -4881,10 +4881,10 @@ theme.PhotoSwipe = (function(){
             if(!vars[i]) {
                 continue;
             }
-            var pair = vars[i].split('=');  
+            var pair = vars[i].split('=');
             if(pair.length < 2) {
                 continue;
-            }           
+            }
             params[pair[0]] = pair[1];
         }
 
@@ -4920,7 +4920,7 @@ theme.PhotoSwipe = (function(){
         // PhotoSwipe opened from URL
         if(fromURL) {
             if(options.galleryPIDs) {
-                // parse real index when custom PIDs are used 
+                // parse real index when custom PIDs are used
                 // http://photoswipe.com/documentation/faq.html#custom-pid-in-url
                 for(var j = 0; j < items.length; j++) {
                     if(items[j].pid == index) {
@@ -5003,7 +5003,7 @@ theme.activeAccordion = (function(){
 })()
 
 theme.HoverMenu = (function () {
-  function HoverMenu(container) { 
+  function HoverMenu(container) {
       var $container = this.$container = $(container);
       var sectionId = $container.attr('data-section-id');
       var item = this.slider = '.item_' + sectionId;
@@ -5012,7 +5012,7 @@ theme.HoverMenu = (function () {
 
     items.forEach((el) => {
       const image = el.querySelector('.img')
-      
+
       el.addEventListener('mouseenter', (e) => {
         gsap.to(image, {
           ease: 'Expo.easeOut',
@@ -5024,7 +5024,7 @@ theme.HoverMenu = (function () {
             scale: 1
         })
       })
-      
+
       el.addEventListener('mouseleave', (e) => {
         gsap.to(image, {
           ease: 'Expo.easeOut',
@@ -5032,9 +5032,9 @@ theme.HoverMenu = (function () {
           scale: zoomout ? 1.2 : 1,
         })
       })
-      
+
       el.addEventListener('mousemove', (e) => {
-        gsap.set(image, { 
+        gsap.set(image, {
           ease: 'Expo.easeOut',
           left: e.offsetX,
           top: e.offsetY,
@@ -5043,7 +5043,7 @@ theme.HoverMenu = (function () {
       })
     })
   }
-  
+
   return HoverMenu;
 })()
 
@@ -5139,7 +5139,7 @@ theme.alert = (function(){
         aTime = time || 2000,
         aMessage = mess || '',
         aClass = type || 'default';
-    $.growl({ 
+    $.growl({
       title: aTitle,
       message: aMessage,
       duration: aTime,
@@ -5205,7 +5205,7 @@ theme.stickyCart = (function(){
       }
     });
   }
-  
+
 })()
 
 // Back to top
@@ -5254,17 +5254,17 @@ theme.Bgcollection = (function(){
            $(this).hover(
            function() {
               $(".colgrid__bg--full[data-index='"+index+"']").addClass('active');
-           }, 
+           },
            function() {
                  $(".colgrid__bg--full[data-index='"+index+"']").removeClass('active');
               }
            );
         });
       }
-    
+
     return Bgcollection;
   })();
-  
+
 
 //Sidebar
 theme.sidebar = (function(){
@@ -5287,7 +5287,7 @@ theme.ajaxFilter = (function() {
 
   var apollo = {
     init: function() {
-      this.initFilter(); 
+      this.initFilter();
     },
     showLoading: function() {
       $(jsLoading).show();
@@ -5298,8 +5298,8 @@ theme.ajaxFilter = (function() {
       }, 600);
       setTimeout(function(){
         $(jsLoading).hide(); //delay 500ms for better UX
-      }, 500); 
-     
+      }, 500);
+
     },
     initFilter: function() {
       apollo.filterParams();
@@ -5449,7 +5449,7 @@ theme.ajaxFilter = (function() {
     });
   }
   apollo.init();
-  
+
 })();
 
 $(theme.init);
