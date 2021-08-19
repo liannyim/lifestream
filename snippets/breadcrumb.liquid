@@ -64,11 +64,11 @@ data-parent-fit="cover" {% endunless%}>
     {% if template contains 'collection' and collection.handle %}
     <h3 class="mb-2 h2 br-title">{{ collection.title }}</h3>
     {% elsif template contains 'page' %}
-    <h3 class="mb-2 h2 br-title">{{ page.title }}</h3>
+    <h1 class="mb-2 h2 br-title">{{ page.title }}</h1>
     {% elsif template contains 'product' and collection.handle %}
       <h3 class="mb-2 h2 br-title">{{ page.title }}</h3>
     {% elsif template contains 'blog' %}
-      <h3 class="mb-2 h2 br-title">{{ blog.title }} {%- include 'icon-rss' -%}</h3>
+      <h1 class="mb-2 h2 br-title">{{ blog.title }} </h1>
     {% endif %}
   {% endif %}
   </div>
