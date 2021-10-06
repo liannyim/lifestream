@@ -133,10 +133,10 @@
           <div class="col-12 my-5"><hr/></div>
           {%- endif -%}
         </div>
-        
+
       </div>
-      
-      
+
+
 
       {%- if blog.comments_enabled? -%}
       {%- if number_of_comments > 0 -%}
@@ -176,13 +176,13 @@
             {%- endunless -%}
             {%- endfor -%}
           </ul>
-          
+
           <div class="js-pagination">
             {%- if paginate.next -%}
             <a href="{{ paginate.next.url }}"></a>
             {%- endif -%}
           </div>
-          
+
           {%- endif -%}
         </div>
         {%- endpaginate -%}
@@ -223,11 +223,11 @@
         </div>
         {% unless section.settings.sidebar_enable %}</div> </div> {% endunless %}
       </div>
-      
-      
+
+
       {%- endif -%}
-      
-      
+
+
 
       <div class="full-width full-width--return-link">
         <a href="{{ blog.url }}" class="h1 return-link">
@@ -241,6 +241,17 @@
     {%- endif -%}
   </article>
 </div>
+
+<style>
+  .article-body a {
+    color: {{ section.settings.article_link_color }};
+    text-decoration: underline;
+  }
+
+  .article-body a:hover {
+    opacity: 0.5;
+  }
+</style>
 
 {% schema %}
 {
@@ -263,6 +274,16 @@
       "id": "related_blog",
       "label": "In same tag",
       "default": "Related by tags"
+    },
+    {
+      "type": "header",
+      "content": "Colours"
+    },
+    {
+      "type": "color",
+      "id": "article_link_color",
+      "label": "Article Link",
+      "default": "#000000"
     },
     {
       "type": "header",
