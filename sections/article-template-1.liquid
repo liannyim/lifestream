@@ -243,12 +243,15 @@
 </div>
 
 <style>
-  .article-body a {
+  .article-body a,
+  .content-block .rte a {
     color: {{ section.settings.article_link_color }};
     text-decoration: underline;
+    font-weight: 500;
   }
 
-  .article-body a:hover {
+  .article-body a:hover,
+  .content-block .rte a:hover {
     opacity: 0.5;
   }
 </style>
